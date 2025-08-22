@@ -38,7 +38,21 @@
         }
     },
     "scripts": {
-        "pint": "pint app config database resources routes tests",
+        "fmt": "pint app config database resources routes tests",
+        "fmt:check": "pint --test app config database resources routes tests",
+        "front:fmt": "npm run format",
+        "front:fmt:check": "npm run format:check",
+        "front:lint": "npm run lint",
+        "check": [
+            "@composer fmt:check",
+            "@composer front:fmt:check",
+            "@composer fmt",
+            "@composer front:lint",
+            "@composer test"
+        ],
+        "pre-commit": [
+            "@composer check"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
