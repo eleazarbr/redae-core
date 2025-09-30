@@ -8,11 +8,16 @@ import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 
 defineProps<{
     status?: string;
     canResetPassword: boolean;
 }>();
+
+defineOptions({
+    layout: GuestLayout,
+});
 </script>
 
 <template>
