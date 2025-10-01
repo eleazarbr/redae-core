@@ -14,7 +14,7 @@ const isAuthenticated = computed(() => Boolean(page.props.auth.user));
                 :href="route('home')"
                 class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
             >
-                Home
+                {{ $t("navbar.home") }}
             </Link>
             <div class="flex items-center gap-4">
                 <Link
