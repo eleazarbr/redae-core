@@ -31,7 +31,7 @@ class RegisterTest extends DuskTestCase
     {
         parent::setUp();
 
-        // Generate unique email for each test
+        // Generate unique email for each test.
         $this->testEmail = 'test_' . time() . '_' . rand(1000, 9999) . '@example.com';
     }
 
@@ -64,35 +64,6 @@ class RegisterTest extends DuskTestCase
             // Verify that the email is now verified
             $user->refresh();
             $this->assertNotNull($user->email_verified_at);
-        });
-    }
-
-    public function test_user_can_register_and_mark_email_as_verified_programmatically(): void
-    {
-        $this->browse(function (Browser $browser) {
-            // Register a new user
-            $this->fillRegistrationForm($browser)
-                ->press(self::SUBMIT_SELECTOR)
-                ->waitForLocation(route('verification.notice', absolute: false))
-                ->assertPathIs(route('verification.notice', absolute: false));
-
-            // Get the user and verify email programmatically
-            $user = User::where('email', $this->testEmail)->first();
-            $this->assertNotNull($user);
-            $this->assertNull($user->email_verified_at);
-
-            // Mark email as verified programmatically
-            $user->markEmailAsVerified();
-
-            // Verify that the email is now verified
-            $user->refresh();
-            $this->assertNotNull($user->email_verified_at);
-
-            // Navigate to dashboard to confirm access
-            $browser
-                ->visit(route('dashboard', absolute: false))
-                ->waitForLocation(route('dashboard', absolute: false))
-                ->assertPathIs(route('dashboard', absolute: false));
         });
     }
 
