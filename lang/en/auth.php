@@ -22,7 +22,7 @@ return [
         'description' => 'Enter your details below to create your account',
         'head_title' => 'Register',
         'name_label' => 'Name',
-        'full_name_placeholder' => 'Full name',
+        'full_name_placeholder' => 'Name',
         'email_label' => 'Email address',
         'email_placeholder' => 'email@example.com',
         'password_label' => 'Password',

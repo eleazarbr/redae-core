@@ -22,7 +22,7 @@ return [
         'description' => 'Ingresa tus datos a continuación para crear tu cuenta',
         'head_title' => 'Registrarse',
         'name_label' => 'Nombre',
-        'full_name_placeholder' => 'Nombre completo',
+        'full_name_placeholder' => 'Nombre',
         'email_label' => 'Correo electrónico',
         'email_placeholder' => 'correo@ejemplo.com',
         'password_label' => 'Contraseña',

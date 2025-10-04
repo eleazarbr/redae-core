@@ -94,7 +94,7 @@ defineOptions({
         <Button
           type="submit"
           class="mt-2 w-full"
-          tabindex="0"
+          :tabindex="5"
           :disabled="processing"
           dusk="submit"
         >
