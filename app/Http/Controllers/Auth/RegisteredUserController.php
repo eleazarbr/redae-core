@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use App\Actions\Auth\RegisterUser;
+use App\Actions\Auth\SendVerificationEmail;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 
 class RegisteredUserController extends Controller
 {
@@ -26,26 +24,14 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterRequest $request, RegisterUser $register, SendVerificationEmail $sendVerification): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $user = $register->execute($request->validated());
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $sendVerification->onQueue('emails')->execute($user);
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return to_route('dashboard');
+        return to_route('verification.notice');
     }
 }
