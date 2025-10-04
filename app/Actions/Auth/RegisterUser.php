@@ -8,14 +8,6 @@ use Illuminate\Support\Facades\DB;
 final class RegisterUser
 {
     /**
-     * Create a new action instance.
-     */
-    public function __construct()
-    {
-        // Prepare the action for execution, leveraging constructor injection.
-    }
-
-    /**
      * Execute the action.
      */
     public function execute(array $data): User

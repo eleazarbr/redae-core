@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\URL;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class RegisterTest extends DuskTestCase
+class RegistrationTest extends DuskTestCase
 {
     private const REGISTER_FORM_SELECTOR = '@register-form';
 
