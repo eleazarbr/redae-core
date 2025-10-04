@@ -17,4 +17,21 @@ return [
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    'register' => [
+        'title' => 'Create an account',
+        'description' => 'Enter your details below to create your account',
+        'head_title' => 'Register',
+        'name_label' => 'Name',
+        'full_name_placeholder' => 'Full name',
+        'email_label' => 'Email address',
+        'email_placeholder' => 'email@example.com',
+        'password_label' => 'Password',
+        'password_placeholder' => 'Password',
+        'password_confirmation_label' => 'Confirm password',
+        'password_confirmation_placeholder' => 'Confirm password',
+        'submit' => 'Create account',
+        'login_prompt' => 'Already have an account?',
+        'login_link' => 'Log in',
+    ],
+
 ];
