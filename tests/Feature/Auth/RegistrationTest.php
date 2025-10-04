@@ -24,7 +24,7 @@ class RegistrationTest extends TestCase
 
         $response = $this->post(route('register.store'), $payload);
 
-        $this->assertGuest();
-        $response->assertRedirect(route('verification.notice'));
+        $this->assertAuthenticated();
+        $response->assertRedirect(route('dashboard'));
     }
 }

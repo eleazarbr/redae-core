@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Actions\Auth\RegisterUser;
-use App\Actions\Auth\SendVerificationEmail;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Actions\Auth\RegisterUser;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use App\Actions\Auth\SendVerificationEmail;
+use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Validation\ValidationException;
 
 class RegisteredUserController extends Controller
@@ -32,6 +33,8 @@ class RegisteredUserController extends Controller
 
         $sendVerification->onQueue('emails')->execute($user);
 
-        return to_route('verification.notice');
+        Auth::login($user);
+
+        return to_route('dashboard');
     }
 }
