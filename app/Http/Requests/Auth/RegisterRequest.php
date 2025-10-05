@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Models\Company;
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
@@ -25,9 +23,9 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'company_name' => 'required|string|max:255|unique:'.Company::class.',name',
+            'company_name' => 'required|string|max:255|unique:companies,name',
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class.',email',
+            'email' => 'required|string|lowercase|email|max:255|unique:users,email',
             'password' => [
                 'required',
                 'string',

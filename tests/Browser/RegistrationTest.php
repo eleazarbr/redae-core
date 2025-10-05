@@ -2,6 +2,9 @@
 
 namespace Tests\Browser;
 
+use App\Enums\Company\UserRole;
+use App\Enums\Company\UserStatus;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Support\Facades\URL;
 use Laravel\Dusk\Browser;
@@ -43,6 +46,12 @@ class RegistrationTest extends DuskTestCase
             $user = User::where('email', self::TEST_EMAIL)->first();
             $this->assertNotNull($user);
             $this->assertNull($user->email_verified_at);
+
+            $company = Company::where('name', self::TEST_COMPANY_NAME)->first();
+            $this->assertNotNull($company);
+            $this->assertTrue($company->is($user->company));
+            $this->assertSame(UserRole::OWNER, $user->role);
+            $this->assertSame(UserStatus::ACTIVE, $user->status);
 
             $verificationUrl = URL::temporarySignedRoute(
                 'verification.verify',

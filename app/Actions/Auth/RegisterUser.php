@@ -22,18 +22,14 @@ final class RegisterUser
                 'slug' => Str::slug($data['company_name']),
             ]);
 
-            $user = User::create([
+            return User::create([
+                'company_id' => $company->id,
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => $data['password'], // Password is hashed via model mutator.
-            ]);
-
-            $company->users()->attach($user->id, [
                 'status' => UserStatus::ACTIVE->value,
                 'role' => UserRole::OWNER->value,
             ]);
-
-            return $user;
         });
     }
 }

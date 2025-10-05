@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Company extends Model
 {
@@ -26,12 +26,10 @@ class Company extends Model
     ];
 
     /**
-     * The users that belong to the company.
+     * Get the users for the company.
      */
-    public function users(): BelongsToMany
+    public function users(): HasMany
     {
-        return $this->belongsToMany(User::class, 'company_user')
-            ->withPivot('status', 'role')
-            ->withTimestamps();
+        return $this->hasMany(User::class);
     }
 }
