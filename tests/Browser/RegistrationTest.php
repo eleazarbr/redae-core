@@ -5,8 +5,8 @@ namespace Tests\Browser;
 use App\Models\User;
 use Illuminate\Support\Facades\URL;
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
 use Tests\Browser\Pages\RegisterPage;
+use Tests\DuskTestCase;
 
 class RegistrationTest extends DuskTestCase
 {
@@ -19,7 +19,7 @@ class RegistrationTest extends DuskTestCase
     public function test_user_can_register_and_verify_email(): void
     {
         $this->browse(function (Browser $browser) {
-            $page = new RegisterPage();
+            $page = new RegisterPage;
 
             $browser->visit($page)
                 ->on($page);
@@ -58,5 +58,4 @@ class RegistrationTest extends DuskTestCase
             $this->assertNotNull($user->email_verified_at);
         });
     }
-
 }
