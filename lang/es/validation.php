@@ -34,7 +34,7 @@ return [
     ],
     'boolean' => 'The :attribute field must be true or false.',
     'can' => 'The :attribute field contains an unauthorized value.',
-    'confirmed' => 'The :attribute field confirmation does not match.',
+    'confirmed' => 'La confirmación de :attribute no coincide.',
     'contains' => 'The :attribute field is missing a required value.',
     'current_password' => 'The password is incorrect.',
     'date' => 'The :attribute field must be a valid date.',
@@ -51,7 +51,7 @@ return [
     'doesnt_contain' => 'The :attribute field must not contain any of the following: :values.',
     'doesnt_end_with' => 'The :attribute field must not end with one of the following: :values.',
     'doesnt_start_with' => 'The :attribute field must not start with one of the following: :values.',
-    'email' => 'The :attribute field must be a valid email address.',
+    'email' => 'El campo :attribute debe ser una dirección de correo válida.',
     'ends_with' => 'The :attribute field must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
     'exists' => 'The selected :attribute is invalid.',
@@ -105,10 +105,10 @@ return [
     'mimes' => 'The :attribute field must be a file of type: :values.',
     'mimetypes' => 'The :attribute field must be a file of type: :values.',
     'min' => [
-        'array' => 'The :attribute field must have at least :min items.',
-        'file' => 'The :attribute field must be at least :min kilobytes.',
-        'numeric' => 'The :attribute field must be at least :min.',
-        'string' => 'The :attribute field must be at least :min characters.',
+        'array' => 'El campo :attribute debe tener al menos :min elementos.',
+        'file' => 'El archivo :attribute debe pesar al menos :min kilobytes.',
+        'numeric' => 'El valor de :attribute debe ser al menos :min.',
+        'string' => 'El campo :attribute debe tener al menos :min caracteres.',
     ],
     'min_digits' => 'The :attribute field must have at least :min digits.',
     'missing' => 'The :attribute field must be missing.',
@@ -139,7 +139,7 @@ return [
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute field format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => 'El campo :attribute es obligatorio.',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
@@ -157,9 +157,9 @@ return [
         'string' => 'The :attribute field must be :size characters.',
     ],
     'starts_with' => 'The :attribute field must start with one of the following: :values.',
-    'string' => 'The :attribute field must be a string.',
-    'timezone' => 'The :attribute field must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'string' => 'El campo :attribute debe ser una cadena de texto.',
+    'timezone' => 'El campo :attribute debe ser una zona horaria válida.',
+    'unique' => 'El campo :attribute ya ha sido registrado.',
     'uploaded' => 'The :attribute failed to upload.',
     'uppercase' => 'The :attribute field must be uppercase.',
     'url' => 'The :attribute field must be a valid URL.',
@@ -194,6 +194,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'nombre',
+        'email' => 'correo electrónico',
+        'password' => 'contraseña',
+        'password_confirmation' => 'confirmación de contraseña',
+        'g-recaptcha-response' => 'verificación de seguridad',
+    ],
 
 ];
