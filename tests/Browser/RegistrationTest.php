@@ -10,6 +10,8 @@ use Tests\DuskTestCase;
 
 class RegistrationTest extends DuskTestCase
 {
+    private const TEST_COMPANY_NAME = 'Test Company';
+
     private const TEST_NAME = 'Test User';
 
     private const TEST_EMAIL = 'test@example.com';
@@ -26,6 +28,7 @@ class RegistrationTest extends DuskTestCase
 
             // Register a new user.
             $page->fillForm($browser, [
+                'company_name' => self::TEST_COMPANY_NAME,
                 'name' => self::TEST_NAME,
                 'email' => self::TEST_EMAIL,
                 'password' => self::TEST_PASSWORD,

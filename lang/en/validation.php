@@ -200,6 +200,7 @@ return [
         'password' => 'password',
         'password_confirmation' => 'password confirmation',
         'g-recaptcha-response' => 'verificación de seguridad',
+        'company_name' => 'company name',
     ],
 
 ];

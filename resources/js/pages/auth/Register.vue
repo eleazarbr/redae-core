@@ -161,6 +161,21 @@ onBeforeUnmount(() => {
 
       <div class="grid gap-6">
         <div class="grid gap-2">
+          <Label for="company_name">{{ $t('auth.register.company_name_label') }}</Label>
+          <Input
+            id="company_name"
+            type="text"
+            required
+            :tabindex="1"
+            autocomplete="organization"
+            name="company_name"
+            :placeholder="$t('auth.register.company_name_placeholder')"
+            dusk="company_name"
+          />
+          <InputError :message="errors.company_name" />
+        </div>
+
+        <div class="grid gap-2">
           <Label for="name">{{ $t('auth.register.name_label') }}</Label>
           <Input
             id="name"

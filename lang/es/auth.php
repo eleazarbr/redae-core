@@ -21,6 +21,8 @@ return [
         'title' => 'Crear una cuenta',
         'description' => 'Ingresa tus datos a continuación para crear tu cuenta',
         'head_title' => 'Registrarse',
+        'company_name_label' => 'Nombre de la empresa',
+        'company_name_placeholder' => 'Nombre de la empresa',
         'name_label' => 'Nombre',
         'full_name_placeholder' => 'Nombre',
         'email_label' => 'Correo electrónico',

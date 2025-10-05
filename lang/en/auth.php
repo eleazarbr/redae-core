@@ -21,6 +21,8 @@ return [
         'title' => 'Create an account',
         'description' => 'Enter your details below to create your account',
         'head_title' => 'Register',
+        'company_name_label' => 'Company Name',
+        'company_name_placeholder' => 'Company Name',
         'name_label' => 'Name',
         'full_name_placeholder' => 'Name',
         'email_label' => 'Email address',

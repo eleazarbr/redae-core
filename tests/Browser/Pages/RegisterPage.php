@@ -15,6 +15,7 @@ class RegisterPage extends Page
     {
         return [
             '@register-form' => '[dusk="register-form"]',
+            '@company_name' => '[dusk="company_name"]',
             '@name' => '[dusk="name"]',
             '@email' => '[dusk="email"]',
             '@password' => '[dusk="password"]',
@@ -27,6 +28,7 @@ class RegisterPage extends Page
     {
         return $browser
             ->waitFor('@register-form')
+            ->type('@company_name', $data['company_name'] ?? '')
             ->type('@name', $data['name'] ?? '')
             ->type('@email', $data['email'] ?? '')
             ->type('@password', $data['password'] ?? '')
