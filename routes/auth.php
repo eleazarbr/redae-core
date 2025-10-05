@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-if (!defined('THROTTLE_LIMIT')) {
+if (! defined('THROTTLE_LIMIT')) {
     define('THROTTLE_LIMIT', 'throttle:6,1');
 }
 

@@ -16,7 +16,7 @@ final class SendVerificationEmail
         return [
             'action',
             'email',
-            'verification'
+            'verification',
         ];
     }
 

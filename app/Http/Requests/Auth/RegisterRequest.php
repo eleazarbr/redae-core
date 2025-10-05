@@ -24,6 +24,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
+            'company_name' => 'required|string|max:255|unique:companies,company_name',
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => [

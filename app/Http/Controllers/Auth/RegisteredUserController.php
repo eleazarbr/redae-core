@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\Auth\RegisterUser;
+use App\Actions\Auth\SendVerificationEmail;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Actions\Auth\RegisterUser;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use App\Actions\Auth\SendVerificationEmail;
-use App\Http\Requests\Auth\RegisterRequest;
-use Illuminate\Validation\ValidationException;
 
 class RegisteredUserController extends Controller
 {
