@@ -23,7 +23,7 @@ class CompanyFactory extends Factory
             'name' => $this->faker->company,
             'slug' => $this->faker->unique()->slug,
             'domain' => $this->faker->optional()->domainName,
-            'tax_id' => $this->faker->optional()->unique()->bothify('??#########'),
+            'tax_id' => $this->faker->optional(0.8)->numerify('##-#######'),
             'billing_address_json' => $this->faker->optional()->randomElement([
                 [
                     'street' => $this->faker->streetAddress,
