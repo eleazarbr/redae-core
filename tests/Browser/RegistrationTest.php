@@ -36,6 +36,7 @@ class RegistrationTest extends DuskTestCase
                 'email' => self::TEST_EMAIL,
                 'password' => self::TEST_PASSWORD,
                 'password_confirmation' => self::TEST_PASSWORD,
+                'terms_accepted' => true,
             ]);
 
             $page->submit($browser)

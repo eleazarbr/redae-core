@@ -20,6 +20,7 @@ class RegisterPage extends Page
             '@email' => '[dusk="email"]',
             '@password' => '[dusk="password"]',
             '@password_confirmation' => '[dusk="password_confirmation"]',
+            '@terms_accepted' => '[dusk="terms_accepted"]',
             '@submit' => '[dusk="submit"]',
         ];
     }
@@ -32,7 +33,8 @@ class RegisterPage extends Page
             ->type('@name', $data['name'] ?? '')
             ->type('@email', $data['email'] ?? '')
             ->type('@password', $data['password'] ?? '')
-            ->type('@password_confirmation', $data['password_confirmation'] ?? $data['password'] ?? '');
+            ->type('@password_confirmation', $data['password_confirmation'] ?? $data['password'] ?? '')
+            ->check('@terms_accepted');
     }
 
     public function submit(Browser $browser): Browser

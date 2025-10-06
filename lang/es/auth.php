@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Language Lines
@@ -34,6 +33,8 @@ return [
         'submit' => 'Crear cuenta',
         'login_prompt' => '¿Ya tienes una cuenta?',
         'login_link' => 'Iniciar sesión',
+        'terms_and_privacy_label' => 'Acepto los :terms_link y la :privacy_link',
+        'terms_link' => 'Términos y Condiciones',
+        'privacy_link' => 'Política de Privacidad',
     ],
-
 ];

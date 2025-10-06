@@ -236,10 +236,38 @@ onBeforeUnmount(() => {
           <InputError :message="errors.password_confirmation" />
         </div>
 
+        <div class="grid gap-2">
+          <div class="flex items-start gap-2">
+            <input
+              id="terms_accepted"
+              type="checkbox"
+              required
+              :tabindex="5"
+              name="terms_accepted"
+              class="mt-1 h-4 w-4 rounded border border-input bg-background ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+              dusk="terms_accepted"
+            />
+            <Label
+              for="terms_accepted"
+              class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              <span
+                v-html="
+                  $t('auth.register.terms_and_privacy_label', {
+                    terms_link: `<a href='${route('terms')}' target='_blank' class='underline underline-offset-4'>${$t('auth.register.terms_link')}</a>`,
+                    privacy_link: `<a href='${route('privacy')}' target='_blank' class='underline underline-offset-4'>${$t('auth.register.privacy_link')}</a>`,
+                  })
+                "
+              ></span>
+            </Label>
+          </div>
+          <InputError :message="errors.terms_accepted" />
+        </div>
+
         <Button
           type="submit"
           class="mt-2 w-full"
-          :tabindex="5"
+          :tabindex="6"
           :disabled="processing || (props.recaptcha.enabled && !recaptchaToken)"
           dusk="submit"
         >
@@ -258,9 +286,9 @@ onBeforeUnmount(() => {
         <TextLink
           :href="route('login')"
           class="underline underline-offset-4"
-          :tabindex="6"
-          >{{ $t('auth.register.login_link') }}</TextLink
-        >
+          :tabindex="7"
+          >{{ $t('auth.register.login_link') }}
+        </TextLink>
       </div>
     </Form>
   </AuthBase>
