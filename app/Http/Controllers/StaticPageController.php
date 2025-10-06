@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Actions\StaticPage\GetContentAction;
 use Inertia\Inertia;
 
 class StaticPageController extends Controller
@@ -10,16 +10,26 @@ class StaticPageController extends Controller
     /**
      * Display the terms of service page.
      */
-    public function terms()
+    public function terms(GetContentAction $getContent)
     {
-        return Inertia::render('static/Terms');
+        $page = $getContent->execute('terms');
+
+        return Inertia::render('static/Terms', [
+            'content' => $page['content'],
+            'lastUpdated' => $page['lastUpdated'],
+        ]);
     }
 
     /**
      * Display the privacy policy page.
      */
-    public function privacy()
+    public function privacy(GetContentAction $getContent)
     {
-        return Inertia::render('static/Privacy');
+        $page = $getContent->execute('privacy');
+
+        return Inertia::render('static/Privacy', [
+            'content' => $page['content'],
+            'lastUpdated' => $page['lastUpdated'],
+        ]);
     }
 }

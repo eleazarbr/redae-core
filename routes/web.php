@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StaticPageController;
 
 // Web Routes.
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
