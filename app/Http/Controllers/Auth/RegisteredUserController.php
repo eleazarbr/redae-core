@@ -24,7 +24,7 @@ class RegisteredUserController extends Controller
                 'enabled' => config('googlerecaptchav3.is_service_enabled'),
                 'siteKey' => config('googlerecaptchav3.site_key'),
                 'scriptUrl' => config('googlerecaptchav3.api_js_url'),
-                'action' => 'register',
+                'action' => config('googlerecaptchav3.setting.0.action'),
             ],
         ]);
     }
