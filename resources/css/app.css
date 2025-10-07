@@ -84,6 +84,89 @@
     }
 }
 
+@layer components {
+    .content {
+        @apply space-y-6 text-base leading-relaxed text-foreground;
+    }
+
+    .content p {
+        @apply text-base leading-relaxed text-muted-foreground;
+    }
+
+    .content h1 {
+        @apply text-4xl font-semibold tracking-tight text-foreground;
+    }
+
+    .content h2 {
+        @apply mt-12 text-3xl font-semibold tracking-tight text-foreground;
+    }
+
+    .content h2:first-child {
+        @apply mt-0;
+    }
+
+    .content h3 {
+        @apply mt-8 text-2xl font-semibold text-foreground;
+    }
+
+    .content h3:first-child {
+        @apply mt-0;
+    }
+
+    .content h4 {
+        @apply mt-6 text-xl font-semibold text-foreground;
+    }
+
+    .content h4:first-child {
+        @apply mt-0;
+    }
+
+    .content ul,
+    .content ol {
+        @apply space-y-3 pl-6 text-muted-foreground;
+    }
+
+    .content ul {
+        @apply list-disc;
+    }
+
+    .content ol {
+        @apply list-decimal;
+    }
+
+    .content a {
+        @apply font-medium text-primary underline underline-offset-4 transition-colors hover:text-primary;
+    }
+
+    .content blockquote {
+        @apply border-l-4 border-border pl-5 italic text-muted-foreground;
+    }
+
+    .content strong {
+        @apply font-semibold text-foreground;
+    }
+
+    .content em {
+        @apply italic;
+    }
+
+    .content hr {
+        @apply my-8 border-border;
+    }
+
+    .content table {
+        @apply w-full table-auto border-collapse text-sm sm:text-base;
+    }
+
+    .content th {
+        @apply border border-border bg-muted px-4 py-3 text-left font-semibold text-foreground;
+    }
+
+    .content td {
+        @apply border border-border px-4 py-3 text-muted-foreground;
+    }
+}
+
 :root {
     --background: hsl(0 0% 100%);
     --foreground: hsl(0 0% 3.9%);

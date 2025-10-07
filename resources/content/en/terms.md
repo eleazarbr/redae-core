@@ -1,5 +1,3 @@
-# Terms and Conditions
-
 ## Introduction
 Welcome to our application. By accessing or using our services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
 

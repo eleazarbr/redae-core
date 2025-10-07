@@ -1,5 +1,3 @@
-# Política de Privacidad  
-
 ## Introducción  
 Tu privacidad es importante para nosotros. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos tu información cuando utilizas nuestros servicios.  
 

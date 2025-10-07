@@ -1,5 +1,3 @@
-# Términos y Condiciones
-
 ## Introducción
 Bienvenido a nuestra aplicación. Al acceder o utilizar nuestros servicios, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones. Por favor, léalos detenidamente.
 
