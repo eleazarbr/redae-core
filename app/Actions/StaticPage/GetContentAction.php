@@ -13,8 +13,9 @@ final class GetContentAction
      */
     public function execute(string $page): array
     {
-        $filePath = resource_path("content/static/{$page}.md");
-        $cacheKey = "static_page_{$page}";
+        $locale = app()->getLocale();
+        $filePath = resource_path("content/{$locale}/{$page}.md");
+        $cacheKey = "static_page_{$locale}_{$page}";
 
         $content = Cache::remember($cacheKey, now()->addHours(24), function () use ($filePath) {
             if (! File::exists($filePath)) {
