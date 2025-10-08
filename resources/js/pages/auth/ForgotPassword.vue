@@ -23,18 +23,27 @@ defineProps<{
     <div
       v-if="status"
       class="mb-4 text-center text-sm font-medium text-green-600"
+      dusk="forgot-password-status-message"
     >
       {{ status }}
     </div>
 
-    <div class="space-y-6">
+    <div
+      class="space-y-6"
+      dusk="forgot-password-container"
+    >
       <Form
         method="post"
         :action="route('password.email')"
         v-slot="{ errors, processing }"
+        dusk="forgot-password-form"
       >
         <div class="grid gap-2">
-          <Label for="email">{{ $t('auth.forgot_password.email_label') }}</Label>
+          <Label
+            for="email"
+            dusk="email-label"
+            >{{ $t('auth.forgot_password.email_label') }}</Label
+          >
           <Input
             id="email"
             type="email"
@@ -42,27 +51,40 @@ defineProps<{
             autocomplete="off"
             autofocus
             :placeholder="$t('auth.forgot_password.email_placeholder')"
+            dusk="email-input"
           />
-          <InputError :message="errors.email" />
+          <InputError
+            :message="errors.email"
+            dusk="email-error"
+          />
         </div>
 
         <div class="my-6 flex items-center justify-start">
           <Button
             class="w-full"
             :disabled="processing"
+            dusk="forgot-password-submit-button"
           >
             <LoaderCircle
               v-if="processing"
               class="h-4 w-4 animate-spin"
+              dusk="forgot-password-spinner"
             />
             {{ $t('auth.forgot_password.submit') }}
           </Button>
         </div>
       </Form>
 
-      <div class="space-x-1 text-center text-sm text-muted-foreground">
+      <div
+        class="space-x-1 text-center text-sm text-muted-foreground"
+        dusk="login-prompt"
+      >
         <span>{{ $t('auth.forgot_password.login_prompt') }}</span>
-        <TextLink :href="route('login')">{{ $t('auth.forgot_password.login_link') }}</TextLink>
+        <TextLink
+          :href="route('login')"
+          dusk="login-link"
+          >{{ $t('auth.forgot_password.login_link') }}</TextLink
+        >
       </div>
     </div>
   </AuthLayout>
