@@ -60,5 +60,6 @@ return [
         'submit' => 'Enviar enlace para restablecer contraseña',
         'login_prompt' => 'O regresa a',
         'login_link' => 'iniciar sesión',
+        'reset_link_sent' => 'Se enviará un enlace de restablecimiento si la cuenta existe.',
     ],
 ];
