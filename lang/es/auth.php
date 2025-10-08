@@ -51,4 +51,14 @@ return [
         'register_prompt' => '¿No tienes una cuenta?',
         'register_link' => 'Regístrate',
     ],
+    'forgot_password' => [
+        'title' => '¿Olvidaste tu contraseña?',
+        'description' => 'Ingresa tu correo para recibir un enlace de restablecimiento de contraseña',
+        'head_title' => '¿Olvidaste tu contraseña?',
+        'email_label' => 'Correo electrónico',
+        'email_placeholder' => 'correo@ejemplo.com',
+        'submit' => 'Enviar enlace para restablecer contraseña',
+        'login_prompt' => 'O regresa a',
+        'login_link' => 'iniciar sesión',
+    ],
 ];

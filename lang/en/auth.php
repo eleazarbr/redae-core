@@ -51,4 +51,14 @@ return [
         'register_prompt' => "Don't have an account?",
         'register_link' => 'Sign up',
     ],
+    'forgot_password' => [
+        'title' => 'Forgot password',
+        'description' => 'Enter your email to receive a password reset link',
+        'head_title' => 'Forgot password',
+        'email_label' => 'Email address',
+        'email_placeholder' => 'email@example.com',
+        'submit' => 'Email password reset link',
+        'login_prompt' => 'Or, return to',
+        'login_link' => 'log in',
+    ],
 ];
