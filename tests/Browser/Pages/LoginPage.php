@@ -36,8 +36,8 @@ class LoginPage extends Page
     {
         return $browser
             ->waitFor('@login-form')
-            ->type('@email', $data['email'] ?? '')
-            ->type('@password', $data['password'] ?? '');
+            ->type('@email-input', $data['email'] ?? '')
+            ->type('@password-input', $data['password'] ?? '');
     }
 
     public function submit(Browser $browser): Browser
