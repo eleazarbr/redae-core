@@ -30,6 +30,7 @@ defineOptions({
     <div
       v-if="status"
       class="mb-4 text-center text-sm font-medium text-green-600"
+      dusk="login-status-message"
     >
       {{ status }}
     </div>
@@ -40,10 +41,15 @@ defineOptions({
       :reset-on-success="['password']"
       v-slot="{ errors, processing }"
       class="flex flex-col gap-6"
+      dusk="login-form"
     >
       <div class="grid gap-6">
         <div class="grid gap-2">
-          <Label for="email">{{ $t('auth.login.email_label') }}</Label>
+          <Label
+            for="email"
+            dusk="email-label"
+            >{{ $t('auth.login.email_label') }}</Label
+          >
           <Input
             id="email"
             type="email"
@@ -53,18 +59,27 @@ defineOptions({
             :tabindex="1"
             autocomplete="email"
             :placeholder="$t('auth.login.email_placeholder')"
+            dusk="email-input"
           />
-          <InputError :message="errors.email" />
+          <InputError
+            :message="errors.email"
+            dusk="email-error"
+          />
         </div>
 
         <div class="grid gap-2">
           <div class="flex items-center justify-between">
-            <Label for="password">{{ $t('auth.login.password_label') }}</Label>
+            <Label
+              for="password"
+              dusk="password-label"
+              >{{ $t('auth.login.password_label') }}</Label
+            >
             <TextLink
               v-if="canResetPassword"
               :href="route('password.request')"
               class="text-sm"
               :tabindex="5"
+              dusk="forgot-password-link"
             >
               {{ $t('auth.login.forgot_password_link') }}
             </TextLink>
@@ -77,19 +92,25 @@ defineOptions({
             :tabindex="2"
             autocomplete="current-password"
             :placeholder="$t('auth.login.password_placeholder')"
+            dusk="password-input"
           />
-          <InputError :message="errors.password" />
+          <InputError
+            :message="errors.password"
+            dusk="password-error"
+          />
         </div>
 
         <div class="flex items-center justify-between">
           <Label
             for="remember"
             class="flex items-center space-x-3"
+            dusk="remember-label"
           >
             <Checkbox
               id="remember"
               name="remember"
               :tabindex="3"
+              dusk="remember-checkbox"
             />
             <span>{{ $t('auth.login.remember_me') }}</span>
           </Label>
@@ -100,20 +121,26 @@ defineOptions({
           class="mt-4 w-full"
           :tabindex="4"
           :disabled="processing"
+          dusk="login-submit-button"
         >
           <LoaderCircle
             v-if="processing"
             class="h-4 w-4 animate-spin"
+            dusk="login-spinner"
           />
           {{ $t('auth.login.submit') }}
         </Button>
       </div>
 
-      <div class="text-center text-sm text-muted-foreground">
+      <div
+        class="text-center text-sm text-muted-foreground"
+        dusk="register-prompt"
+      >
         {{ $t('auth.login.register_prompt') }}
         <TextLink
           :href="route('register')"
           :tabindex="5"
+          dusk="register-link"
           >{{ $t('auth.login.register_link') }}</TextLink
         >
       </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser;
+namespace Tests\Browser\Auth;
 
 use App\Enums\Company\UserRole;
 use App\Enums\Company\UserStatus;
