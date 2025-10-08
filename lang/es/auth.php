@@ -37,4 +37,18 @@ return [
         'terms_link' => 'Términos y Condiciones',
         'privacy_link' => 'Política de Privacidad',
     ],
+    'login' => [
+        'title' => 'Inicia sesión en tu cuenta',
+        'description' => 'Ingresa tu correo y contraseña para iniciar sesión',
+        'head_title' => 'Iniciar sesión',
+        'email_label' => 'Correo electrónico',
+        'email_placeholder' => 'correo@ejemplo.com',
+        'password_label' => 'Contraseña',
+        'password_placeholder' => 'Contraseña',
+        'forgot_password_link' => '¿Olvidaste tu contraseña?',
+        'remember_me' => 'Recuérdame',
+        'submit' => 'Iniciar sesión',
+        'register_prompt' => '¿No tienes una cuenta?',
+        'register_link' => 'Regístrate',
+    ],
 ];

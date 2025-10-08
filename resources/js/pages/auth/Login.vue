@@ -22,10 +22,10 @@ defineOptions({
 
 <template>
   <AuthBase
-    title="Log in to your account"
-    description="Enter your email and password below to log in"
+    :title="$t('auth.login.title')"
+    :description="$t('auth.login.description')"
   >
-    <Head title="Log in" />
+    <Head :title="$t('auth.login.head_title')" />
 
     <div
       v-if="status"
@@ -43,7 +43,7 @@ defineOptions({
     >
       <div class="grid gap-6">
         <div class="grid gap-2">
-          <Label for="email">Email address</Label>
+          <Label for="email">{{ $t('auth.login.email_label') }}</Label>
           <Input
             id="email"
             type="email"
@@ -52,21 +52,21 @@ defineOptions({
             autofocus
             :tabindex="1"
             autocomplete="email"
-            placeholder="email@example.com"
+            :placeholder="$t('auth.login.email_placeholder')"
           />
           <InputError :message="errors.email" />
         </div>
 
         <div class="grid gap-2">
           <div class="flex items-center justify-between">
-            <Label for="password">Password</Label>
+            <Label for="password">{{ $t('auth.login.password_label') }}</Label>
             <TextLink
               v-if="canResetPassword"
               :href="route('password.request')"
               class="text-sm"
               :tabindex="5"
             >
-              Forgot password?
+              {{ $t('auth.login.forgot_password_link') }}
             </TextLink>
           </div>
           <Input
@@ -76,7 +76,7 @@ defineOptions({
             required
             :tabindex="2"
             autocomplete="current-password"
-            placeholder="Password"
+            :placeholder="$t('auth.login.password_placeholder')"
           />
           <InputError :message="errors.password" />
         </div>
@@ -91,7 +91,7 @@ defineOptions({
               name="remember"
               :tabindex="3"
             />
-            <span>Remember me</span>
+            <span>{{ $t('auth.login.remember_me') }}</span>
           </Label>
         </div>
 
@@ -105,16 +105,16 @@ defineOptions({
             v-if="processing"
             class="h-4 w-4 animate-spin"
           />
-          Log in
+          {{ $t('auth.login.submit') }}
         </Button>
       </div>
 
       <div class="text-center text-sm text-muted-foreground">
-        Don't have an account?
+        {{ $t('auth.login.register_prompt') }}
         <TextLink
           :href="route('register')"
           :tabindex="5"
-          >Sign up</TextLink
+          >{{ $t('auth.login.register_link') }}</TextLink
         >
       </div>
     </Form>
