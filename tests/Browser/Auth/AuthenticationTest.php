@@ -19,7 +19,7 @@ class AuthenticationTest extends DuskTestCase
         ]);
 
         $this->browse(function (Browser $browser) use ($user) {
-            $page = new LoginPage();
+            $page = new LoginPage;
 
             $browser->visit($page)
                 ->on($page);
