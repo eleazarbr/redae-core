@@ -62,4 +62,20 @@ return [
         'login_link' => 'iniciar sesión',
         'reset_link_sent' => 'Se enviará un enlace de restablecimiento si la cuenta existe.',
     ],
+    'notifications' => [
+        'greeting' => '¡Hola!',
+        'verify_email' => [
+            'subject' => 'Verifica tu dirección de correo electrónico',
+            'line_1' => 'Haz clic en el botón de abajo para verificar tu dirección de correo electrónico.',
+            'action' => 'Verificar correo electrónico',
+            'line_2' => 'Si no creaste una cuenta, no es necesario realizar ninguna acción.',
+        ],
+        'reset_password' => [
+            'subject' => 'Notificación de restablecimiento de contraseña',
+            'line_1' => 'Recibiste este correo porque recibimos una solicitud de restablecimiento de contraseña para tu cuenta.',
+            'action' => 'Restablecer contraseña',
+            'line_2' => 'Este enlace de restablecimiento de contraseña expirará en :count minutos.',
+            'line_3' => 'Si no solicitaste un restablecimiento de contraseña, no es necesario realizar ninguna acción.',
+        ],
+    ],
 ];
