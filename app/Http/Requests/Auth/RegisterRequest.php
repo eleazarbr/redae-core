@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Support\Recaptcha;
 use Illuminate\Foundation\Http\FormRequest;
-use TimeHunter\LaravelGoogleReCaptchaV3\Validations\GoogleReCaptchaV3ValidationRule;
 
 class RegisterRequest extends FormRequest
 {
@@ -35,14 +35,6 @@ class RegisterRequest extends FormRequest
             ],
         ];
 
-        // Add Google reCAPTCHA v3 validation rule if the service is enabled.
-        if (config('googlerecaptchav3.is_service_enabled')) {
-            $rules['g-recaptcha-response'] = [
-                'required',
-                new GoogleReCaptchaV3ValidationRule('register'),
-            ];
-        }
-
-        return $rules;
+        return array_merge($rules, Recaptcha::validationRules('register'));
     }
 }

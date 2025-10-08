@@ -4,13 +4,23 @@ import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useRecaptcha, type RecaptchaConfig } from '@/composables/useRecaptcha';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import { toRef } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   status?: string;
+  recaptcha: RecaptchaConfig;
 }>();
+
+const {
+  recaptchaToken,
+  shouldDisableSubmit,
+  isRecaptchaEnabled,
+  handleRequestFinished,
+} = useRecaptcha(toRef(props, 'recaptcha'));
 </script>
 
 <template>
@@ -21,11 +31,11 @@ defineProps<{
     <Head :title="$t('auth.forgot_password.head_title')" />
 
     <div
-      v-if="status"
+      v-if="props.status"
       class="mb-4 text-center text-sm font-medium text-green-600"
       dusk="forgot-password-status-message"
     >
-      {{ status }}
+      {{ props.status }}
     </div>
 
     <div
@@ -37,7 +47,15 @@ defineProps<{
         :action="route('password.email')"
         v-slot="{ errors, processing }"
         dusk="forgot-password-form"
+        :on-finish="handleRequestFinished"
       >
+        <input
+          v-if="isRecaptchaEnabled"
+          type="hidden"
+          name="g-recaptcha-response"
+          :value="recaptchaToken"
+        />
+
         <div class="grid gap-2">
           <Label
             for="email"
@@ -62,7 +80,7 @@ defineProps<{
         <div class="my-6 flex items-center justify-start">
           <Button
             class="w-full"
-            :disabled="processing"
+            :disabled="processing || shouldDisableSubmit"
             dusk="forgot-password-submit-button"
           >
             <LoaderCircle
@@ -73,6 +91,8 @@ defineProps<{
             {{ $t('auth.forgot_password.submit') }}
           </Button>
         </div>
+
+        <InputError :message="errors['g-recaptcha-response']" />
       </Form>
 
       <div

@@ -4,136 +4,27 @@ import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useRecaptcha, type RecaptchaConfig } from '@/composables/useRecaptcha';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { toRef } from 'vue';
 
 defineOptions({
   layout: GuestLayout,
 });
 
 const props = defineProps<{
-  recaptcha: {
-    enabled: boolean;
-    siteKey: string | null;
-    scriptUrl: string | null;
-    action: string;
-  };
+  recaptcha: RecaptchaConfig;
 }>();
 
-declare global {
-  interface Window {
-    grecaptcha?: {
-      ready(callback: () => void): void;
-      execute(siteKey: string, options: { action: string }): Promise<string>;
-    };
-  }
-}
-
-const recaptchaToken = ref('');
-let refreshInterval: number | undefined;
-
-const buildScriptSource = () => {
-  if (!props.recaptcha.siteKey) {
-    return null;
-  }
-
-  const baseUrl = props.recaptcha.scriptUrl ?? 'https://www.google.com/recaptcha/api.js';
-  const separator = baseUrl.includes('?') ? '&' : '?';
-
-  return `${baseUrl}${separator}render=${props.recaptcha.siteKey}`;
-};
-
-const executeRecaptcha = async () => {
-  if (!props.recaptcha.siteKey || !window.grecaptcha) {
-    return;
-  }
-
-  try {
-    recaptchaToken.value = await window.grecaptcha.execute(props.recaptcha.siteKey, {
-      action: props.recaptcha.action,
-    });
-  } catch (error) {
-    console.error('Failed to execute Google reCAPTCHA', error);
-    recaptchaToken.value = '';
-  }
-};
-
-const scheduleRefresh = () => {
-  if (refreshInterval) {
-    window.clearInterval(refreshInterval);
-  }
-
-  refreshInterval = window.setInterval(() => {
-    void executeRecaptcha();
-  }, 110_000);
-};
-
-const initializeRecaptcha = () => {
-  if (!window.grecaptcha) {
-    return;
-  }
-
-  window.grecaptcha.ready(async () => {
-    await executeRecaptcha();
-    scheduleRefresh();
-  });
-};
-
-const loadRecaptchaScript = () => {
-  const scriptSrc = buildScriptSource();
-  if (!scriptSrc) {
-    return;
-  }
-
-  const scriptId = 'google-recaptcha-script';
-  const existingScript = document.getElementById(scriptId) as HTMLScriptElement | null;
-
-  if (existingScript) {
-    if (window.grecaptcha) {
-      initializeRecaptcha();
-    } else {
-      existingScript.addEventListener('load', initializeRecaptcha, { once: true });
-    }
-
-    return;
-  }
-
-  const script = document.createElement('script');
-  script.id = scriptId;
-  script.src = scriptSrc;
-  script.async = true;
-  script.defer = true;
-  script.addEventListener('load', initializeRecaptcha, { once: true });
-  script.addEventListener('error', (event) => {
-    console.error('Failed to load Google reCAPTCHA script', event);
-  });
-
-  document.head.appendChild(script);
-};
-
-const handleRequestFinished = () => {
-  if (!props.recaptcha.enabled) {
-    return;
-  }
-
-  void executeRecaptcha();
-};
-
-onMounted(() => {
-  if (props.recaptcha.enabled && props.recaptcha.siteKey) {
-    loadRecaptchaScript();
-  }
-});
-
-onBeforeUnmount(() => {
-  if (refreshInterval) {
-    window.clearInterval(refreshInterval);
-    refreshInterval = undefined;
-  }
-});
+const {
+  recaptchaToken,
+  shouldDisableSubmit,
+  isRecaptchaEnabled,
+  handleRequestFinished,
+} = useRecaptcha(toRef(props, 'recaptcha'));
 </script>
 
 <template>
@@ -153,7 +44,7 @@ onBeforeUnmount(() => {
       dusk="register-form"
     >
       <input
-        v-if="props.recaptcha.enabled"
+        v-if="isRecaptchaEnabled"
         type="hidden"
         name="g-recaptcha-response"
         :value="recaptchaToken"
@@ -269,7 +160,7 @@ onBeforeUnmount(() => {
           type="submit"
           class="mt-2 w-full"
           :tabindex="6"
-          :disabled="processing || (props.recaptcha.enabled && !recaptchaToken)"
+          :disabled="processing || shouldDisableSubmit"
           dusk="submit"
         >
           <LoaderCircle

@@ -118,6 +118,11 @@ return [
             'threshold' => (float) env('RECAPTCHA_V3_REGISTER_THRESHOLD', 0.5),
             'score_comparison' => true,
         ],
+        [
+            'action' => 'forgot_password',
+            'threshold' => (float) env('RECAPTCHA_V3_FORGOT_PASSWORD_THRESHOLD', 0.5),
+            'score_comparison' => true,
+        ],
     ],
 
     /*

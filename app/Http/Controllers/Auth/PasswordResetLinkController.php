@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Actions\Auth\SendPasswordResetLink;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
+use App\Support\Recaptcha;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,6 +20,7 @@ class PasswordResetLinkController extends Controller
     {
         return Inertia::render('auth/ForgotPassword', [
             'status' => $request->session()->get('status'),
+            'recaptcha' => Recaptcha::configuration('forgot_password'),
         ]);
     }
 
@@ -26,15 +29,13 @@ class PasswordResetLinkController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request, SendPasswordResetLink $sendPasswordResetLink): RedirectResponse
+    public function store(ForgotPasswordRequest $request, SendPasswordResetLink $sendPasswordResetLink): RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
+        $validated = $request->validated();
 
         $sendPasswordResetLink
             ->onQueue('emails')
-            ->execute($request->input('email'));
+            ->execute($validated['email']);
 
         return back()->with('status', __('auth.forgot_password.reset_link_sent'));
     }
