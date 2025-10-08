@@ -18,6 +18,30 @@ declare global {
 
 const isClient = typeof window !== 'undefined' && typeof document !== 'undefined';
 const SCRIPT_ID = 'google-recaptcha-script';
+let activeInstances = 0;
+
+const cleanupRecaptchaArtifacts = () => {
+    if (!isClient) {
+        return;
+    }
+
+    const script = document.getElementById(SCRIPT_ID);
+    if (script?.parentNode) {
+        script.parentNode.removeChild(script);
+    }
+
+    document.querySelectorAll('.grecaptcha-badge').forEach((badge) => {
+        badge.parentElement?.removeChild(badge);
+    });
+
+    if ('grecaptcha' in window) {
+        (window as unknown as Record<string, unknown>).grecaptcha = undefined;
+    }
+
+    if ('___grecaptcha_cfg' in window) {
+        (window as Record<string, unknown>).___grecaptcha_cfg = undefined;
+    }
+};
 
 const buildScriptSource = (config: RecaptchaConfig | null) => {
     if (!config?.siteKey) {
@@ -129,6 +153,7 @@ export const useRecaptcha = (configInput: MaybeRef<RecaptchaConfig | null | unde
             return;
         }
 
+        activeInstances += 1;
         loadRecaptchaScript();
     });
 
@@ -140,6 +165,16 @@ export const useRecaptcha = (configInput: MaybeRef<RecaptchaConfig | null | unde
         if (refreshInterval) {
             window.clearInterval(refreshInterval);
             refreshInterval = undefined;
+        }
+
+        if (!isRecaptchaEnabled.value) {
+            return;
+        }
+
+        activeInstances = Math.max(0, activeInstances - 1);
+
+        if (activeInstances === 0) {
+            cleanupRecaptchaArtifacts();
         }
     });
 
