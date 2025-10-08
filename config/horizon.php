@@ -184,7 +184,7 @@ return [
     */
 
     'defaults' => [
-        'supervisor-1' => [
+        'app-default' => [
             'connection' => 'redis',
             'queue' => ['default'],
             'balance' => 'auto',
@@ -197,20 +197,41 @@ return [
             'timeout' => 60,
             'nice' => 0,
         ],
+        'app-emails' => [
+            'connection' => 'redis',
+            'queue' => ['emails'],
+            'balance' => 'auto',
+            'autoScalingStrategy' => 'time',
+            'maxProcesses' => 1,
+            'maxTime' => 0,
+            'maxJobs' => 0,
+            'memory' => 128,
+            'tries' => 3,
+            'timeout' => 120,
+            'nice' => 0,
+        ],
     ],
 
     'environments' => [
         'production' => [
-            'supervisor-1' => [
+            'app-default' => [
                 'maxProcesses' => 10,
+                'balanceMaxShift' => 1,
+                'balanceCooldown' => 3,
+            ],
+            'app-emails' => [
+                'maxProcesses' => 5,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
         ],
 
         'local' => [
-            'supervisor-1' => [
+            'app-default' => [
                 'maxProcesses' => 3,
+            ],
+            'app-emails' => [
+                'maxProcesses' => 1,
             ],
         ],
     ],
