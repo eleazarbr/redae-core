@@ -12,20 +12,22 @@ const page = usePage();
 
 <template>
   <SidebarGroup class="px-2 py-0">
-    <SidebarGroupLabel>Platform</SidebarGroupLabel>
+    <SidebarGroupLabel>
+      {{ $t('dashboard.sidebar.platform') }}
+    </SidebarGroupLabel>
     <SidebarMenu>
       <SidebarMenuItem
         v-for="item in items"
-        :key="item.title"
+        :key="item.href"
       >
         <SidebarMenuButton
           as-child
           :is-active="item.href === page.url"
-          :tooltip="item.title"
+          :tooltip="$t(item.title)"
         >
           <Link :href="item.href">
             <component :is="item.icon" />
-            <span>{{ item.title }}</span>
+            <span>{{ $t(item.title) }}</span>
           </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>

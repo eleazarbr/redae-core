@@ -15,6 +15,7 @@ createInertiaApp({
   resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
+      .provide('appName', appName)
       .use(plugin)
       .use(ZiggyVue)
       .use(i18nVue, { resolve: (lang: string) => import(`../../lang/php_${lang}.json`) })

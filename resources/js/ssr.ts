@@ -16,6 +16,7 @@ createServer(
       resolve: resolvePage,
       setup: ({ App, props, plugin }) =>
         createSSRApp({ render: () => h(App, props) })
+          .provide('appName', appName)
           .use(plugin)
           .use(ZiggyVue, {
             ...page.props.ziggy,
