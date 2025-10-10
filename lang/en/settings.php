@@ -25,4 +25,9 @@ return [
         'heading' => 'Update password',
         'description' => 'Ensure your account is using a long, random password to stay secure',
     ],
+    'appearance' => [
+        'title' => 'Appearance settings',
+        'heading' => 'Appearance settings',
+        'description' => "Update your account's appearance settings",
+    ],
 ];

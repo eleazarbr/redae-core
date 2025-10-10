@@ -25,4 +25,9 @@ return [
         'heading' => 'Actualizar contraseña',
         'description' => 'Asegúrate de que tu cuenta use una contraseña larga y aleatoria para mantenerse segura',
     ],
+    'appearance' => [
+        'title' => 'Configuración de apariencia',
+        'heading' => 'Configuración de apariencia',
+        'description' => 'Actualiza la configuración de apariencia de tu cuenta',
+    ],
 ];
