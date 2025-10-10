@@ -20,4 +20,9 @@ return [
         'delete_account_confirm' => '¿Estás seguro de que deseas eliminar tu cuenta?',
         'delete_account_description' => 'Una vez que tu cuenta sea eliminada, todos sus recursos y datos también serán eliminados permanentemente. Por favor, ingresa tu contraseña para confirmar que deseas eliminar tu cuenta de forma permanente.',
     ],
+    'password' => [
+        'title' => 'Configuración de la contraseña',
+        'heading' => 'Actualizar contraseña',
+        'description' => 'Asegúrate de que tu cuenta use una contraseña larga y aleatoria para mantenerse segura',
+    ],
 ];

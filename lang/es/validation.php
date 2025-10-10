@@ -198,6 +198,7 @@ return [
         'name' => 'nombre',
         'email' => 'correo electrónico',
         'password' => 'contraseña',
+        'current_password' => 'contraseña actual',
         'password_confirmation' => 'confirmación de contraseña',
         'g-recaptcha-response' => 'verificación de seguridad',
         'company_name' => 'nombre de la empresa',
