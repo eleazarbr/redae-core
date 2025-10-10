@@ -72,6 +72,8 @@ return [
     ],
     'notifications' => [
         'greeting' => '¡Hola!',
+        'salutation' => 'Saludos.',
+        'action_text' => 'Si tienes problemas para hacer clic en el botón ":action_text", copia y pega la siguiente URL en tu navegador web:',
         'verify_email' => [
             'subject' => 'Verifica tu dirección de correo electrónico',
             'line_1' => 'Haz clic en el botón de abajo para verificar tu dirección de correo electrónico.',

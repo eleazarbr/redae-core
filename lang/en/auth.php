@@ -71,6 +71,8 @@ return [
     ],
     'notifications' => [
         'greeting' => 'Hello!',
+        'salutation' => 'Regards.',
+        'action_text' => 'If you\'re having trouble clicking the ":action_text" button, copy and paste the URL below into your web browser:',
         'verify_email' => [
             'subject' => 'Verify Email Address',
             'line_1' => 'Please click the button below to verify your email address.',

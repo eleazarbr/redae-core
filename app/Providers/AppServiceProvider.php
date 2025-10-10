@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 ->subject(Lang::get('auth.notifications.verify_email.subject'))
                 ->line(Lang::get('auth.notifications.verify_email.line_1'))
                 ->action(Lang::get('auth.notifications.verify_email.action'), $verificationUrl)
+                ->salutation(Lang::get('auth.notifications.salutation'))
                 ->line(Lang::get('auth.notifications.verify_email.line_2'));
         });
 
@@ -46,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
                 ->line(Lang::get('auth.notifications.reset_password.line_2', [
                     'count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire'),
                 ]))
+                ->salutation(Lang::get('auth.notifications.salutation'))
                 ->line(Lang::get('auth.notifications.reset_password.line_3'));
         });
     }
