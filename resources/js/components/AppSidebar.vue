@@ -19,12 +19,12 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
   {
     title: 'dashboard.sidebar.github_repo',
-    href: 'https://github.com/laravel/vue-starter-kit',
+    href: 'https://github.com/eleazarbr/redae-core',
     icon: Folder,
   },
   {
     title: 'dashboard.sidebar.documentation',
-    href: 'https://laravel.com/docs/starter-kits#vue',
+    href: route('home'),
     icon: BookOpen,
   },
 ];
