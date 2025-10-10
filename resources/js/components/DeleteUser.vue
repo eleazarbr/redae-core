@@ -25,17 +25,19 @@ const passwordInput = ref<HTMLInputElement | null>(null);
 <template>
   <div class="space-y-6">
     <HeadingSmall
-      title="Delete account"
-      description="Delete your account and all of its resources"
+      :title="$t('settings.profile.delete_account')"
+      :description="$t('settings.profile.delete_account_description')"
     />
     <div class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
       <div class="relative space-y-0.5 text-red-600 dark:text-red-100">
-        <p class="font-medium">Warning</p>
-        <p class="text-sm">Please proceed with caution, this cannot be undone.</p>
+        <p class="font-medium">{{ $t('common.labels.warning') }}</p>
+        <p class="text-sm">{{ $t('common.labels.please_proceed_with_caution') }}</p>
       </div>
       <Dialog>
         <DialogTrigger as-child>
-          <Button variant="destructive">Delete account</Button>
+          <Button variant="destructive">
+            {{ $t('settings.profile.delete_account_button') }}
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <Form
@@ -50,10 +52,11 @@ const passwordInput = ref<HTMLInputElement | null>(null);
             v-slot="{ errors, processing, reset, clearErrors }"
           >
             <DialogHeader class="space-y-3">
-              <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
+              <DialogTitle>
+                {{ $t('settings.profile.delete_account_confirm') }}
+              </DialogTitle>
               <DialogDescription>
-                Once your account is deleted, all of its resources and data will also be permanently deleted. Please enter your password to confirm
-                you would like to permanently delete your account.
+                {{ $t('settings.profile.delete_account_description') }}
               </DialogDescription>
             </DialogHeader>
 
@@ -61,14 +64,14 @@ const passwordInput = ref<HTMLInputElement | null>(null);
               <Label
                 for="password"
                 class="sr-only"
-                >Password</Label
+                >{{ $t('common.labels.password') }}</Label
               >
               <Input
                 id="password"
                 type="password"
                 name="password"
                 ref="passwordInput"
-                placeholder="Password"
+                :placeholder="$t('common.placeholders.password')"
               />
               <InputError :message="errors.password" />
             </div>
@@ -84,7 +87,7 @@ const passwordInput = ref<HTMLInputElement | null>(null);
                     }
                   "
                 >
-                  Cancel
+                  {{ $t('common.buttons.cancel') }}
                 </Button>
               </DialogClose>
 
@@ -93,7 +96,7 @@ const passwordInput = ref<HTMLInputElement | null>(null);
                 variant="destructive"
                 :disabled="processing"
               >
-                Delete account
+                {{ $t('settings.profile.delete_account_button') }}
               </Button>
             </DialogFooter>
           </Form>

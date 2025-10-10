@@ -28,8 +28,8 @@ const currentPath = page.props.ziggy?.location ? new URL(page.props.ziggy.locati
 <template>
   <div class="px-4 py-6">
     <Heading
-      title="Settings"
-      description="Manage your profile and account settings"
+      :title="$t('settings.section.title')"
+      :description="$t('settings.section.description')"
     />
 
     <div class="flex flex-col lg:flex-row lg:space-x-12">

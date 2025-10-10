@@ -20,7 +20,7 @@ defineProps<Props>();
 
 const breadcrumbItems: BreadcrumbItem[] = [
   {
-    title: 'Profile settings',
+    title: 'settings.title',
     href: '/settings/profile',
   },
 ];
@@ -31,13 +31,13 @@ const user = page.props.auth.user as User;
 
 <template>
   <AppLayout :breadcrumbs="breadcrumbItems">
-    <Head title="Profile settings" />
+    <Head :title="$t('settings.title')" />
 
     <SettingsLayout>
       <div class="flex flex-col space-y-6">
         <HeadingSmall
-          title="Profile information"
-          description="Update your name and email address"
+          :title="$t('settings.profile.title')"
+          :description="$t('settings.profile.description')"
         />
 
         <Form
@@ -47,7 +47,9 @@ const user = page.props.auth.user as User;
           v-slot="{ errors, processing, recentlySuccessful }"
         >
           <div class="grid gap-2">
-            <Label for="name">Name</Label>
+            <Label for="name">
+              {{ $t('common.labels.name') }}
+            </Label>
             <Input
               id="name"
               class="mt-1 block w-full"
@@ -55,7 +57,7 @@ const user = page.props.auth.user as User;
               :default-value="user.name"
               required
               autocomplete="name"
-              placeholder="Full name"
+              :placeholder="$t('common.placeholders.name')"
             />
             <InputError
               class="mt-2"
@@ -64,7 +66,9 @@ const user = page.props.auth.user as User;
           </div>
 
           <div class="grid gap-2">
-            <Label for="email">Email address</Label>
+            <Label for="email">
+              {{ $t('common.labels.email') }}
+            </Label>
             <Input
               id="email"
               type="email"
@@ -73,7 +77,7 @@ const user = page.props.auth.user as User;
               :default-value="user.email"
               required
               autocomplete="username"
-              placeholder="Email address"
+              :placeholder="$t('common.placeholders.email')"
             />
             <InputError
               class="mt-2"
@@ -103,7 +107,9 @@ const user = page.props.auth.user as User;
           </div>
 
           <div class="flex items-center gap-4">
-            <Button :disabled="processing">Save</Button>
+            <Button :disabled="processing">
+              {{ $t('common.buttons.save') }}
+            </Button>
 
             <Transition
               enter-active-class="transition ease-in-out"
@@ -115,7 +121,7 @@ const user = page.props.auth.user as User;
                 v-show="recentlySuccessful"
                 class="text-sm text-neutral-600"
               >
-                Saved.
+                {{ $t('common.messages.saved') }}
               </p>
             </Transition>
           </div>
