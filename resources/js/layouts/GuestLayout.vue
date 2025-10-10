@@ -3,7 +3,7 @@ import GuestLayout from '@/layouts/guest/GuestSimpleLayout.vue';
 </script>
 
 <template>
-    <GuestLayout>
-        <slot />
-    </GuestLayout>
+  <GuestLayout>
+    <slot />
+  </GuestLayout>
 </template>

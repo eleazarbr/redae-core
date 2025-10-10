@@ -15,12 +15,7 @@ const props = defineProps<{
   recaptcha: RecaptchaConfig;
 }>();
 
-const {
-  recaptchaToken,
-  shouldDisableSubmit,
-  isRecaptchaEnabled,
-  handleRequestFinished,
-} = useRecaptcha(toRef(props, 'recaptcha'));
+const { recaptchaToken, shouldDisableSubmit, isRecaptchaEnabled, handleRequestFinished } = useRecaptcha(toRef(props, 'recaptcha'));
 </script>
 
 <template>

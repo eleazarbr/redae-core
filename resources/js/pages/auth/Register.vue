@@ -19,12 +19,7 @@ const props = defineProps<{
   recaptcha: RecaptchaConfig;
 }>();
 
-const {
-  recaptchaToken,
-  shouldDisableSubmit,
-  isRecaptchaEnabled,
-  handleRequestFinished,
-} = useRecaptcha(toRef(props, 'recaptcha'));
+const { recaptchaToken, shouldDisableSubmit, isRecaptchaEnabled, handleRequestFinished } = useRecaptcha(toRef(props, 'recaptcha'));
 </script>
 
 <template>
@@ -142,15 +137,15 @@ const {
               for="terms_accepted"
               class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-                <span
+              <span
                 class="leading-relaxed"
                 v-html="
                   $t('auth.register.terms_and_privacy_label', {
-                  terms_link: `<a href='${route('terms')}' target='_blank' class='underline underline-offset-4'>${$t('auth.register.terms_link')}</a>`,
-                  privacy_link: `<a href='${route('privacy')}' target='_blank' class='underline underline-offset-4'>${$t('auth.register.privacy_link')}</a>`,
+                    terms_link: `<a href='${route('terms')}' target='_blank' class='underline underline-offset-4'>${$t('auth.register.terms_link')}</a>`,
+                    privacy_link: `<a href='${route('privacy')}' target='_blank' class='underline underline-offset-4'>${$t('auth.register.privacy_link')}</a>`,
                   })
                 "
-                ></span>
+              ></span>
             </Label>
           </div>
           <InputError :message="errors.terms_accepted" />
