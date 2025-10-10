@@ -62,6 +62,14 @@ return [
         'login_link' => 'iniciar sesión',
         'reset_link_sent' => 'Se enviará un enlace de restablecimiento si la cuenta existe.',
     ],
+    'verify_email' => [
+        'title' => 'Verifica tu correo electrónico',
+        'description' => 'Por favor verifica tu dirección de correo electrónico haciendo clic en el enlace que acabamos de enviarte.',
+        'head_title' => 'Verificación de correo electrónico',
+        'link_sent' => 'Se ha enviado un nuevo enlace de verificación a la dirección de correo que proporcionaste durante el registro.',
+        'submit' => 'Reenviar correo de verificación',
+        'logout' => 'Cerrar sesión',
+    ],
     'notifications' => [
         'greeting' => '¡Hola!',
         'verify_email' => [

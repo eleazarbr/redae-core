@@ -61,6 +61,14 @@ return [
         'login_prompt' => 'Or, return to',
         'login_link' => 'log in',
     ],
+    'verify_email' => [
+        'title' => 'Verify email',
+        'description' => 'Please verify your email address by clicking on the link we just emailed to you.',
+        'head_title' => 'Email verification',
+        'link_sent' => 'A new verification link has been sent to the email address you provided during registration.',
+        'submit' => 'Resend verification email',
+        'logout' => 'Log out',
+    ],
     'notifications' => [
         'greeting' => 'Hello!',
         'verify_email' => [

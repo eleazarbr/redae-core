@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        VerifyEmail::toMailUsing(function ($notifiable, string $verificationUrl) {
+        VerifyEmail::toMailUsing(function ($_, string $verificationUrl) {
             return (new MailMessage)
                 ->greeting(Lang::get('auth.notifications.greeting'))
                 ->subject(Lang::get('auth.notifications.verify_email.subject'))
