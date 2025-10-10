@@ -7,4 +7,9 @@ return [
         'github_repo' => 'Github Repo',
         'documentation' => 'Documentation',
     ],
+    'navbar_user' => [
+        'profile' => 'Profile',
+        'settings' => 'Settings',
+        'logout' => 'Logout',
+    ],
 ];

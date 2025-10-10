@@ -35,7 +35,7 @@ defineProps<Props>();
         as="button"
       >
         <Settings class="mr-2 h-4 w-4" />
-        Settings
+        {{ $t('dashboard.navbar_user.settings') }}
       </Link>
     </DropdownMenuItem>
   </DropdownMenuGroup>
@@ -49,7 +49,7 @@ defineProps<Props>();
       as="button"
     >
       <LogOut class="mr-2 h-4 w-4" />
-      Log out
+      {{ $t('dashboard.navbar_user.logout') }}
     </Link>
   </DropdownMenuItem>
 </template>
