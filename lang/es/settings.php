@@ -6,6 +6,11 @@ return [
         'title' => 'Configuraciones',
         'description' => 'Administra la configuración de tu perfil y cuenta',
     ],
+    'navbar' => [
+        'profile' => 'Perfil',
+        'password' => 'Contraseña',
+        'appearance' => 'Apariencia',
+    ],
     'profile' => [
         'title' => 'Configuraciones',
         'description' => 'Actualiza tu nombre y dirección de correo electrónico',

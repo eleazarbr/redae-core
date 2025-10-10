@@ -7,15 +7,15 @@ import { Link, usePage } from '@inertiajs/vue3';
 
 const sidebarNavItems: NavItem[] = [
   {
-    title: 'Profile',
+    title: 'settings.navbar.profile',
     href: '/settings/profile',
   },
   {
-    title: 'Password',
+    title: 'settings.navbar.password',
     href: '/settings/password',
   },
   {
-    title: 'Appearance',
+    title: 'settings.navbar.appearance',
     href: '/settings/appearance',
   },
 ];
@@ -43,7 +43,7 @@ const currentPath = page.props.ziggy?.location ? new URL(page.props.ziggy.locati
             as-child
           >
             <Link :href="item.href">
-              {{ item.title }}
+              {{ $t(item.title) }}
             </Link>
           </Button>
         </nav>

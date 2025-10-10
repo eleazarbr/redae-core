@@ -6,6 +6,11 @@ return [
         'title' => 'Settings',
         'description' => 'Manage your profile and account settings',
     ],
+    'navbar' => [
+        'profile' => 'Profile',
+        'password' => 'Password',
+        'appearance' => 'Appearance',
+    ],
     'profile' => [
         'title' => 'Settings',
         'description' => 'Update your name and email address',
