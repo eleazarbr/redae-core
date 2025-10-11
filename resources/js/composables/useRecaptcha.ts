@@ -7,6 +7,8 @@ export interface RecaptchaConfig {
   action: string;
 }
 
+export const RECAPTCHA_RESPONSE_FIELD = 'g-recaptcha-response';
+
 declare global {
   interface Window {
     grecaptcha?: {

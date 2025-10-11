@@ -4,7 +4,7 @@ import TextLink from '@/components/TextLink.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useRecaptcha, type RecaptchaConfig } from '@/composables/useRecaptcha';
+import { RECAPTCHA_RESPONSE_FIELD, useRecaptcha, type RecaptchaConfig } from '@/composables/useRecaptcha';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import { Form, Head } from '@inertiajs/vue3';
@@ -41,7 +41,7 @@ const { recaptchaToken, shouldDisableSubmit, isRecaptchaEnabled, handleRequestFi
       <input
         v-if="isRecaptchaEnabled"
         type="hidden"
-        name="g-recaptcha-response"
+        :name="RECAPTCHA_RESPONSE_FIELD"
         :value="recaptchaToken"
       />
 
@@ -165,7 +165,7 @@ const { recaptchaToken, shouldDisableSubmit, isRecaptchaEnabled, handleRequestFi
           {{ $t('auth.register.submit') }}
         </Button>
 
-        <InputError :message="errors['g-recaptcha-response']" />
+        <InputError :message="errors[RECAPTCHA_RESPONSE_FIELD]" />
       </div>
 
       <div class="text-center text-sm text-muted-foreground">
