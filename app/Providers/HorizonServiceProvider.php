@@ -26,7 +26,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
         $authorizedEmails = explode(',', config('horizon.authorized_emails'));
 
         Gate::define('viewHorizon', function ($user = null) use ($authorizedEmails) {
-            return in_array(optional($user)->email, $authorizedEmails);
+            return in_array($user?->email, $authorizedEmails);
         });
     }
 }
