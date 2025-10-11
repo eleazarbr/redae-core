@@ -19,6 +19,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Authorized Emails
+    |--------------------------------------------------------------------------
+    |
+    | This is a comma-separated list of email addresses that are authorized
+    | to access the Horizon dashboard in non-local environments. Make sure
+    | to set this in your environment file if you want to restrict access.
+    |
+    */
+    'authorized_emails' => env('HORIZON_AUTHORIZED_EMAILS', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | Horizon Path
     |--------------------------------------------------------------------------
     |
