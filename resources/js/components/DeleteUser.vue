@@ -56,7 +56,7 @@ const passwordInput = ref<HTMLInputElement | null>(null);
                 {{ $t('settings.profile.delete_account_confirm') }}
               </DialogTitle>
               <DialogDescription>
-                {{ $t('settings.profile.delete_account_description') }}
+                {{ $t('settings.profile.delete_account_description_confirm') }}
               </DialogDescription>
             </DialogHeader>
 

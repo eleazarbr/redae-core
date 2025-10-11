@@ -18,7 +18,7 @@ return [
         'delete_account_description' => 'Elimina tu cuenta y todos sus recursos',
         'delete_account_button' => 'Eliminar cuenta',
         'delete_account_confirm' => '¿Estás seguro de que deseas eliminar tu cuenta?',
-        'delete_account_description' => 'Una vez que tu cuenta sea eliminada, todos sus recursos y datos también serán eliminados permanentemente. Por favor, ingresa tu contraseña para confirmar que deseas eliminar tu cuenta de forma permanente.',
+        'delete_account_description_confirm' => 'Una vez que tu cuenta sea eliminada, todos sus recursos y datos también serán eliminados permanentemente. Por favor, ingresa tu contraseña para confirmar que deseas eliminar tu cuenta de forma permanente.',
     ],
     'password' => [
         'title' => 'Configuración de la contraseña',
