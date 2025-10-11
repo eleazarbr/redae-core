@@ -34,7 +34,7 @@ defineProps<Props>();
       v-if="lastUpdated"
       class="mt-10 text-sm text-muted-foreground"
     >
-      Última actualización: {{ lastUpdated }}
+      {{ $t('static.updated_at', { date: lastUpdated }) }}
     </p>
   </StaticPageLayout>
 </template>

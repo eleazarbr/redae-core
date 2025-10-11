@@ -2,6 +2,7 @@
 
 namespace App\Actions\StaticPage;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -26,7 +27,7 @@ final class GetContentAction
         });
 
         $lastUpdated = File::exists($filePath)
-            ? date('F j, Y', File::lastModified($filePath))
+            ? Carbon::createFromTimestamp(File::lastModified($filePath))->locale(app()->getLocale())->translatedFormat('F j, Y')
             : null;
 
         return [
