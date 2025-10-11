@@ -1,7 +1,8 @@
 <?php
 
-return [
+use App\Constants\ThrottleConstants;
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -112,4 +113,17 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Rate Limiting
+    |--------------------------------------------------------------------------
+    |
+    | Configure the rate limiting for authentication-related endpoints.
+    |
+    */
+
+    'throttle' => [
+        'verification' => ThrottleConstants::DEFAULT_RATE_LIMIT,
+        'password' => ThrottleConstants::DEFAULT_RATE_LIMIT,
+    ],
 ];
