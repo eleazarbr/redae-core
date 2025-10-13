@@ -66,6 +66,24 @@ const user = page.props.auth.user as User;
           </div>
 
           <div class="grid gap-2">
+            <Label for="last_name">
+              {{ $t('common.labels.last_name') }}
+            </Label>
+            <Input
+              id="last_name"
+              class="mt-1 block w-full"
+              name="last_name"
+              :default-value="user.last_name ?? ''"
+              required
+              :placeholder="$t('common.placeholders.last_name')"
+            />
+            <InputError
+              class="mt-2"
+              :message="errors.last_name"
+            />
+          </div>
+
+          <div class="grid gap-2">
             <Label for="email">
               {{ $t('common.labels.email') }}
             </Label>
