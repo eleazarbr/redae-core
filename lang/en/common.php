@@ -3,6 +3,7 @@
 return [
     'labels' => [
         'name' => 'Name',
+        'last_name' => 'Last name',
         'email' => 'Email address',
         'warning' => 'Warning',
         'please_proceed_with_caution' => 'Please proceed with caution, this cannot be undone.',
@@ -14,6 +15,7 @@ return [
 
     'placeholders' => [
         'name' => 'Name',
+        'last_name' => 'Last name',
         'email' => 'Email address',
         'password' => 'Password',
         'current_password' => 'Current password',

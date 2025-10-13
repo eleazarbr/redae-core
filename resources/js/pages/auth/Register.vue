@@ -9,7 +9,7 @@ import AuthBase from '@/layouts/AuthLayout.vue';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
-import { toRef } from 'vue';
+import { toRef, ref } from 'vue';
 
 defineOptions({
   layout: GuestLayout,
@@ -20,6 +20,9 @@ const props = defineProps<{
 }>();
 
 const { recaptchaToken, shouldDisableSubmit, isRecaptchaEnabled, handleRequestFinished } = useRecaptcha(toRef(props, 'recaptcha'));
+
+// Reactive variable to track the value of the password field.
+const passwordValue = ref('');
 </script>
 
 <template>
@@ -45,7 +48,7 @@ const { recaptchaToken, shouldDisableSubmit, isRecaptchaEnabled, handleRequestFi
         :value="recaptchaToken"
       />
 
-      <div class="grid gap-6">
+        <div class="grid gap-6">
         <div class="grid gap-2">
           <Label for="company_name">{{ $t('auth.register.company_name_label') }}</Label>
           <Input
@@ -61,20 +64,37 @@ const { recaptchaToken, shouldDisableSubmit, isRecaptchaEnabled, handleRequestFi
           <InputError :message="errors.company_name" />
         </div>
 
-        <div class="grid gap-2">
-          <Label for="name">{{ $t('auth.register.name_label') }}</Label>
-          <Input
-            id="name"
-            type="text"
-            required
-            autofocus
-            :tabindex="1"
-            autocomplete="name"
-            name="name"
-            :placeholder="$t('auth.register.full_name_placeholder')"
-            dusk="name"
-          />
-          <InputError :message="errors.name" />
+        <div class="grid gap-2 md:grid-cols-2 md:gap-4">
+          <div class="grid gap-2">
+            <Label for="name">{{ $t('auth.register.name_label') }}</Label>
+            <Input
+              id="name"
+              type="text"
+              required
+              autofocus
+              :tabindex="1"
+              autocomplete="name"
+              name="name"
+              :placeholder="$t('auth.register.full_name_placeholder')"
+              dusk="name"
+            />
+            <InputError :message="errors.name" />
+          </div>
+
+          <div class="grid gap-2">
+            <Label for="last_name">{{ $t('auth.register.last_name_label') }}</Label>
+            <Input
+              id="last_name"
+              type="text"
+              required
+              :tabindex="1"
+              autocomplete="family-name"
+              name="last_name"
+              :placeholder="$t('auth.register.last_name_placeholder')"
+              dusk="last_name"
+            />
+            <InputError :message="errors.last_name" />
+          </div>
         </div>
 
         <div class="grid gap-2">
@@ -101,13 +121,17 @@ const { recaptchaToken, shouldDisableSubmit, isRecaptchaEnabled, handleRequestFi
             :tabindex="3"
             autocomplete="new-password"
             name="password"
+            v-model="passwordValue"
             :placeholder="$t('auth.register.password_placeholder')"
             dusk="password"
           />
           <InputError :message="errors.password" />
         </div>
 
-        <div class="grid gap-2">
+        <div
+          v-show="passwordValue.length > 0"
+          class="grid gap-2"
+        >
           <Label for="password_confirmation">{{ $t('auth.register.password_confirmation_label') }}</Label>
           <Input
             id="password_confirmation"

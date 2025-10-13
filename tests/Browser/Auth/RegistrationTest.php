@@ -17,6 +17,8 @@ class RegistrationTest extends DuskTestCase
 
     private const TEST_NAME = 'Test User';
 
+    private const TEST_LAST_NAME = 'User Last';
+
     private const TEST_EMAIL = 'test@example.com';
 
     private const TEST_PASSWORD = 'Secret123!';
@@ -33,6 +35,7 @@ class RegistrationTest extends DuskTestCase
             $page->fillForm($browser, [
                 'company_name' => self::TEST_COMPANY_NAME,
                 'name' => self::TEST_NAME,
+                'last_name' => self::TEST_LAST_NAME,
                 'email' => self::TEST_EMAIL,
                 'password' => self::TEST_PASSWORD,
                 'password_confirmation' => self::TEST_PASSWORD,
@@ -47,6 +50,7 @@ class RegistrationTest extends DuskTestCase
             $user = User::where('email', self::TEST_EMAIL)->first();
             $this->assertNotNull($user);
             $this->assertNull($user->email_verified_at);
+            $this->assertSame(self::TEST_LAST_NAME, $user->last_name);
 
             $company = Company::where('name', self::TEST_COMPANY_NAME)->first();
             $this->assertNotNull($company);

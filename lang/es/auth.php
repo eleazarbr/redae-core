@@ -24,6 +24,8 @@ return [
         'company_name_placeholder' => 'Nombre de la empresa',
         'name_label' => 'Nombre',
         'full_name_placeholder' => 'Nombre',
+        'last_name_label' => 'Apellido',
+        'last_name_placeholder' => 'Apellido',
         'email_label' => 'Correo electrónico',
         'email_placeholder' => 'correo@ejemplo.com',
         'password_label' => 'Contraseña',

@@ -22,6 +22,7 @@ class RegistrationTest extends TestCase
         $payload = [
             'company_name' => 'Test Company',
             'name' => 'Test User',
+            'last_name' => 'User Last',
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
@@ -38,6 +39,7 @@ class RegistrationTest extends TestCase
 
         $user = User::where('email', $payload['email'])->first();
         $this->assertNotNull($user);
+        $this->assertSame($payload['last_name'], $user->last_name);
 
         $this->assertTrue($company->is($user->company));
         $this->assertSame(UserRole::OWNER, $user->role);
