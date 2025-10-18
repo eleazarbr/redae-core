@@ -70,8 +70,9 @@ jobs:
       - name: Update ChromeDriver
         run: php artisan dusk:chrome-driver --detect --no-interaction
 
-      - name: Prepare Dusk Environment & Run Tests
+      - name: Run Laravel Dusk Tests
         run: |
+          php -r "file_put_contents('.env', preg_replace('/^APP_URL=.*/m', 'APP_URL=http://127.0.0.1:8000', file_get_contents('.env')));"
           php artisan migrate:fresh --no-interaction --force
           php artisan dusk
         env:
