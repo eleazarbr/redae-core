@@ -73,7 +73,6 @@ jobs:
       - name: Run Laravel Dusk Tests
         run: |
           php -r "file_put_contents('.env', preg_replace('/^APP_URL=.*/m', 'APP_URL=http://127.0.0.1:8000', file_get_contents('.env')));"
-          php artisan migrate:fresh --no-interaction --force
           php artisan serve --host=127.0.0.1 --port=8000 --no-reload > storage/logs/dusk-server.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID' EXIT
