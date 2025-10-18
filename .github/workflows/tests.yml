@@ -56,7 +56,7 @@ jobs:
         run: npm run build
 
       - name: Tests
-        run: php artisan test --env=testing --coverage --min=60
+        run: php artisan test --coverage --min=60
 
       - name: Setup Chrome
         id: setup-chrome
