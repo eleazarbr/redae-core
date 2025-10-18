@@ -56,4 +56,23 @@ jobs:
         run: npm run build
 
       - name: Tests
-        run: php artisan test
+        run: php artisan test --env=testing --coverage --min=60
+
+      - name: Setup Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install Chrome Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libatk-bridge2.0-0 libgtk-3-0 libxtst6 xdg-utils libxss1 libasound2 fonts-liberation libgbm1
+
+      - name: Update ChromeDriver
+        run: php artisan dusk:chrome-driver --detect --no-interaction
+
+      - name: Prepare Dusk Environment & Run Tests
+        run: |
+          php artisan migrate:fresh --no-interaction --force
+          php artisan dusk
+        env:
+          DUSK_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
