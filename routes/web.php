@@ -15,6 +15,7 @@ Route::get('privacy', [StaticPageController::class, 'privacy'])->name('privacy')
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('company', [CompanyController::class, 'index'])->name('company.index');
+    Route::patch('company', [CompanyController::class, 'update'])->name('company.update');
 });
 
 require __DIR__.'/settings.php';
