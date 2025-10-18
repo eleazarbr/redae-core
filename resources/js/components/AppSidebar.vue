@@ -5,14 +5,19 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Building2 } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
   {
     title: 'dashboard.sidebar.dashboard',
-    href: '/dashboard',
+    href: route('dashboard'),
     icon: LayoutGrid,
+  },
+  {
+    title: 'dashboard.sidebar.company',
+    href: route('company.index'),
+    icon: Building2,
   },
 ];
 
