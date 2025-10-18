@@ -39,4 +39,21 @@ export interface User {
   updated_at: string;
 }
 
+export interface CompanyBillingAddress {
+  line1?: string | null;
+  city?: string | null;
+  state?: string | null;
+  postal_code?: string | null;
+}
+
+export interface Company {
+  id: number;
+  name: string;
+  slug: string;
+  domain: string | null;
+  tax_id: string | null;
+  country: string | null;
+  billing_address: CompanyBillingAddress | null;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;
