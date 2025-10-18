@@ -1,14 +1,17 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { Form, Head } from '@inertiajs/vue3';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Select } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import AppLayout from '@/layouts/AppLayout.vue';
 import CompanyLayout from '@/layouts/company/Layout.vue';
+import { AMERICAS_COUNTRIES, type CountryRegion } from '@/lib/countries';
 import { type BreadcrumbItem, type Company } from '@/types';
 
 interface Props {
@@ -24,6 +27,32 @@ const breadcrumbItems: BreadcrumbItem[] = [
     href: '/company',
   },
 ];
+
+const regionLabels: Record<CountryRegion, string> = {
+  'north-america': 'Norteamérica',
+  'central-america': 'Centroamérica',
+  'south-america': 'Sudamérica',
+  caribbean: 'Caribe',
+};
+
+const regionOrder: readonly CountryRegion[] = [
+  'north-america',
+  'central-america',
+  'south-america',
+  'caribbean',
+];
+
+const countryGroups = computed(() =>
+  regionOrder
+    .map((region) => ({
+      region,
+      label: regionLabels[region],
+      options: AMERICAS_COUNTRIES.filter((country) => country.region === region).sort(
+        (a, b) => a.name.localeCompare(b.name, 'es'),
+      ),
+    }))
+    .filter(({ options }) => options.length > 0),
+);
 </script>
 
 <template>
@@ -99,14 +128,27 @@ const breadcrumbItems: BreadcrumbItem[] = [
             <Label for="country">
               {{ $t('company.form.labels.country') }}
             </Label>
-            <Input
+            <Select
               id="country"
-              class="mt-1 block w-full uppercase"
+              class="mt-1 block w-full"
               name="country"
-              maxlength="2"
               :default-value="company.country ?? ''"
-              :placeholder="$t('company.form.placeholders.country')"
-            />
+            >
+              <template
+                v-for="group in countryGroups"
+                :key="group.region"
+              >
+                <optgroup :label="group.label">
+                  <option
+                    v-for="country in group.options"
+                    :key="country.code"
+                    :value="country.code"
+                  >
+                    {{ country.name }}
+                  </option>
+                </optgroup>
+              </template>
+            </Select>
             <InputError
               class="mt-2"
               :message="errors.country"
