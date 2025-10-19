@@ -20,6 +20,7 @@ final class RegisterUser
             $company = Company::create([
                 'name' => $data['company_name'],
                 'slug' => Str::slug($data['company_name']),
+                'country' => $data['country'] ?? 'MX',
             ]);
 
             return User::create([
