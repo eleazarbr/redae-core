@@ -2,27 +2,17 @@
 import Heading from '@/components/Heading.vue';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { type NavItem } from '@/types';
+import type { AppPageProps, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
-const sidebarNavItems: NavItem[] = [
-  {
-    title: 'settings.navbar.profile',
-    href: '/settings/profile',
-  },
-  {
-    title: 'settings.navbar.password',
-    href: '/settings/password',
-  },
-  {
-    title: 'settings.navbar.appearance',
-    href: '/settings/appearance',
-  },
-];
+const page = usePage<AppPageProps>();
 
-const page = usePage();
+const sidebarNavItems = computed<NavItem[]>(() => (page.props.navigation?.settings?.tabs ?? []) as NavItem[]);
 
-const currentPath = page.props.ziggy?.location ? new URL(page.props.ziggy.location).pathname : '';
+const currentPath = computed(() =>
+  page.props.ziggy?.location ? new URL(page.props.ziggy.location).pathname : '',
+);
 </script>
 
 <template>

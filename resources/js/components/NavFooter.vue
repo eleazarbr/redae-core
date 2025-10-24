@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { resolveIcon } from '@/lib/icons';
 import { type NavItem } from '@/types';
 
 interface Props {
@@ -7,7 +8,9 @@ interface Props {
   class?: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const resolveIconComponent = (icon?: string) => resolveIcon(icon);
 </script>
 
 <template>
@@ -15,7 +18,7 @@ defineProps<Props>();
     <SidebarGroupContent>
       <SidebarMenu>
         <SidebarMenuItem
-          v-for="item in items"
+          v-for="item in props.items"
           :key="item.href"
         >
           <SidebarMenuButton
@@ -27,7 +30,10 @@ defineProps<Props>();
               target="_blank"
               rel="noopener noreferrer"
             >
-              <component :is="item.icon" />
+              <component
+                v-if="item.icon && resolveIconComponent(item.icon)"
+                :is="resolveIconComponent(item.icon)"
+              />
               <span>{{ $t(item.title) }}</span>
             </a>
           </SidebarMenuButton>

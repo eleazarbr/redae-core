@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
+import { resolveIcon } from '@/lib/icons';
+import type { AppPageProps, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
 
 defineProps<{
   items: NavItem[];
 }>();
 
-const page = usePage();
+const page = usePage<AppPageProps>();
+
+const resolveIconComponent = (icon?: string) => resolveIcon(icon);
 </script>
 
 <template>
@@ -24,9 +27,12 @@ const page = usePage();
           as-child
           :is-active="item.href === page.url"
           :tooltip="$t(item.title)"
-        >
+          >
           <Link :href="item.href">
-            <component :is="item.icon" />
+            <component
+              v-if="item.icon && resolveIconComponent(item.icon)"
+              :is="resolveIconComponent(item.icon)"
+            />
             <span>{{ $t(item.title) }}</span>
           </Link>
         </SidebarMenuButton>
