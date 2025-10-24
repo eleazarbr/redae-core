@@ -24,12 +24,12 @@ class NavigationServiceProvider extends ServiceProvider
             $navigation->extend('sidebar.main', [
                 [
                     'title' => 'dashboard.sidebar.dashboard',
-                    'href' => route('dashboard', [], false),
+                    'href' => fn () => route('dashboard', [], false),
                     'icon' => 'LayoutGrid',
                 ],
                 [
                     'title' => 'dashboard.sidebar.company',
-                    'href' => route('company.index', [], false),
+                    'href' => fn () => route('company.index', [], false),
                     'icon' => 'Building2',
                 ],
             ]);
@@ -42,7 +42,7 @@ class NavigationServiceProvider extends ServiceProvider
                 ],
                 [
                     'title' => 'dashboard.sidebar.documentation',
-                    'href' => route('home', [], false),
+                    'href' => fn () => route('home', [], false),
                     'icon' => 'BookOpen',
                 ],
             ]);
@@ -50,22 +50,22 @@ class NavigationServiceProvider extends ServiceProvider
             $navigation->extend('company.tabs', [
                 [
                     'title' => 'company.navbar.general',
-                    'href' => route('company.index', [], false),
+                    'href' => fn () => route('company.index', [], false),
                 ],
             ]);
 
             $navigation->extend('settings.tabs', [
                 [
                     'title' => 'settings.navbar.profile',
-                    'href' => route('profile.edit', [], false),
+                    'href' => fn () => route('profile.edit', [], false),
                 ],
                 [
                     'title' => 'settings.navbar.password',
-                    'href' => route('password.edit', [], false),
+                    'href' => fn () => route('password.edit', [], false),
                 ],
                 [
                     'title' => 'settings.navbar.appearance',
-                    'href' => route('appearance', [], false),
+                    'href' => fn () => route('appearance', [], false),
                 ],
             ]);
         });

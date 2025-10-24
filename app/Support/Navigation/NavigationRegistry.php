@@ -2,6 +2,7 @@
 
 namespace App\Support\Navigation;
 
+use Closure;
 use Illuminate\Support\Arr;
 
 class NavigationRegistry
@@ -18,7 +19,7 @@ class NavigationRegistry
      *
      * @param  array<int, array<string, mixed>>|\Closure(): array<int, array<string, mixed>>  $items
      */
-    public function extend(string $area, array|\Closure $items): void
+    public function extend(string $area, array|Closure $items): void
     {
         $resolved = value($items);
 
@@ -38,7 +39,9 @@ class NavigationRegistry
      */
     public function get(string $area): array
     {
-        return Arr::get($this->items, $area, []);
+        $items = Arr::get($this->items, $area, []);
+
+        return is_array($items) ? $this->resolveValue($items) : [];
     }
 
     /**
@@ -48,6 +51,29 @@ class NavigationRegistry
      */
     public function toArray(): array
     {
-        return $this->items;
+        /** @var array<string, mixed> $resolved */
+        $resolved = $this->resolveValue($this->items);
+
+        return $resolved;
+    }
+
+    /**
+     * Resolve any deferred values stored in the navigation tree.
+     */
+    protected function resolveValue(mixed $value): mixed
+    {
+        if ($value instanceof Closure) {
+            return $this->resolveValue(value($value));
+        }
+
+        if (is_array($value)) {
+            foreach ($value as $key => $nested) {
+                $value[$key] = $this->resolveValue($nested);
+            }
+
+            return $value;
+        }
+
+        return $value;
     }
 }
