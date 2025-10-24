@@ -51,10 +51,7 @@ class NavigationRegistry
      */
     public function toArray(): array
     {
-        /** @var array<string, mixed> $resolved */
-        $resolved = $this->resolveValue($this->items);
-
-        return $resolved;
+        return $this->resolveValue($this->items);
     }
 
     /**
@@ -71,9 +68,56 @@ class NavigationRegistry
                 $value[$key] = $this->resolveValue($nested);
             }
 
-            return $value;
+            return array_is_list($value)
+                ? $this->sortNavigationList($value)
+                : $value;
         }
 
         return $value;
+    }
+
+    /**
+     * Sort a navigation list based on the optional "order" property.
+     *
+     * Items without an explicit order retain their relative position and are
+     * placed after all ordered items.
+     *
+     * @param  array<int, mixed>  $items
+     * @return array<int, mixed>
+     */
+    protected function sortNavigationList(array $items): array
+    {
+        $indexed = [];
+
+        foreach ($items as $index => $item) {
+            $indexed[] = [
+                'item' => $item,
+                'order' => is_array($item) && array_key_exists('order', $item)
+                    ? $item['order']
+                    : null,
+                'index' => $index,
+            ];
+        }
+
+        usort($indexed, function (array $a, array $b): int {
+            $aOrder = $a['order'];
+            $bOrder = $b['order'];
+
+            if ($aOrder === $bOrder) {
+                return $a['index'] <=> $b['index'];
+            }
+
+            if ($aOrder === null) {
+                return 1;
+            }
+
+            if ($bOrder === null) {
+                return -1;
+            }
+
+            return $aOrder <=> $bOrder;
+        });
+
+        return array_map(static fn (array $entry) => $entry['item'], $indexed);
     }
 }

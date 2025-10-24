@@ -26,11 +26,13 @@ class NavigationServiceProvider extends ServiceProvider
                     'title' => 'dashboard.sidebar.dashboard',
                     'href' => fn () => route('dashboard', [], false),
                     'icon' => 'LayoutGrid',
+                    'order' => 10,
                 ],
                 [
                     'title' => 'dashboard.sidebar.company',
                     'href' => fn () => route('company.index', [], false),
                     'icon' => 'Building2',
+                    'order' => 20,
                 ],
             ]);
 
@@ -39,11 +41,13 @@ class NavigationServiceProvider extends ServiceProvider
                     'title' => 'dashboard.sidebar.github_repo',
                     'href' => 'https://github.com/eleazarbr/redae-core',
                     'icon' => 'Folder',
+                    'order' => 90,
                 ],
                 [
                     'title' => 'dashboard.sidebar.documentation',
                     'href' => fn () => route('home', [], false),
                     'icon' => 'BookOpen',
+                    'order' => 100,
                 ],
             ]);
 
@@ -51,6 +55,7 @@ class NavigationServiceProvider extends ServiceProvider
                 [
                     'title' => 'company.navbar.general',
                     'href' => fn () => route('company.index', [], false),
+                    'order' => 10,
                 ],
             ]);
 
@@ -58,14 +63,17 @@ class NavigationServiceProvider extends ServiceProvider
                 [
                     'title' => 'settings.navbar.profile',
                     'href' => fn () => route('profile.edit', [], false),
+                    'order' => 10,
                 ],
                 [
                     'title' => 'settings.navbar.password',
                     'href' => fn () => route('password.edit', [], false),
+                    'order' => 20,
                 ],
                 [
                     'title' => 'settings.navbar.appearance',
                     'href' => fn () => route('appearance', [], false),
+                    'order' => 30,
                 ],
             ]);
         });
