@@ -60,6 +60,7 @@
 <body class="font-sans antialiased">
   @includeWhen(config('gtm.enabled'), 'partials.gtm.body')
   @inertia
+  @stack('inertia-packages')
 </body>
 
 </html>
