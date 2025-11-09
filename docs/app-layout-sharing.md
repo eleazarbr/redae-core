@@ -1,6 +1,6 @@
-# Shared Components & Ziggy
+# Shared Components, Ziggy & i18n
 
-This document describes the minimal steps required to expose the core `AppLayout.vue` and the shared Ziggy `route()` helper so Inertia pages that live inside vendor packages (such as `vendor/**/package-**`) can consume them without duplicating code or publishing npm packages.
+This document summarizes how the host application exposes its layout, routing helper, and i18n utilities so any custom package living under `vendor/**` can consume the same UI primitives without separate builds or npm publications.
 
 ## Core
 
@@ -8,6 +8,7 @@ This document describes the minimal steps required to expose the core `AppLayout
    - Add `resources/js/core/index.ts` with:
      ```ts
      export { default as AppLayout } from '@/layouts/AppLayout.vue';
+     export { trans } from 'laravel-vue-i18n';
      export { route, useRoute } from 'ziggy-js';
      ```
 
@@ -22,15 +23,19 @@ This document describes the minimal steps required to expose the core `AppLayout
      "@redae/core/*": ["./resources/js/core/*"]
      ```
 
-4. **Rebuild assets**  
-   - Run `npm run build` (or `npm run dev`) so Vite resolves the new alias during local development and production builds.
+4. **Keep i18n in sync**  
+   - Publish each custom package language folder into `lang/vendor/{package}` (the default Laravel location).  
+   - The existing `laravel-vue-i18n` Vite plugin will auto-convert PHP arrays from both the core (`lang/{locale}`) and vendor overrides (`lang/vendor/{package}/{locale}`) into the runtime JSON consumed by Inertia. No extra configuration is required—just ensure `npm run dev` / `npm run build` runs after new strings are added.
+
+5. **Rebuild assets**  
+   - Run `npm run build` (or `npm run dev`) so Vite resolves the alias and regenerates the compiled translation JSON.
 
 ## Package integration steps
 
-1. Import the core layout (and helper) from the shared alias:
+1. Import the core layout plus helpers from the shared alias:
    ```vue
    <script setup>
-   import { AppLayout, route } from '@redae/core';
+   import { AppLayout, route, trans } from '@redae/core';
    </script>
    ```
 
@@ -41,22 +46,23 @@ This document describes the minimal steps required to expose the core `AppLayout
    });
    ```
 
-3. Use the shared `route()` helper anywhere inside the package page, e.g.:
+3. Use the shared helpers inside the package code:
    ```ts
-   const portalHref = computed(() => props.billingPortalUrl ?? route('package-**.index'));
+   const portalHref = computed(() => props.billingPortalUrl ?? route('custom-package.portal'));
+   const localizedTitle = computed(() => trans('custom-package::company.billing.title'));
    ```
 
-4. Keep the rest of the page logic unchanged. Because both the layout and Ziggy helpers live in the host app, no extra build configuration is needed inside the package.
+4. Keep the rest of the page logic unchanged. Because the layout, routing helper, and i18n instance live in the host app, no extra build configuration is needed in the custom package.
 
-## Next steps for custom package.
+## Next steps for a custom package
 
 1. **Share more UI primitives (optional)**  
    - Import additional components from the same alias once the core exports them (e.g., buttons, cards). Follow the same `defineOptions` pattern or standard component registration.
 
 2. **Verify rendering**  
-   - Visit `package-**.index` and confirm the page renders with the host AppLayout and that `route()` resolves both package and core route names.
+   - Visit the package routes (for example `custom-package.billing`) and confirm the page renders with the host AppLayout, `route()` resolves both package/core routes, and `$t` / `trans()` surface the published translations.
 
 3. **Document the dependency**  
    - Note in the package README that it expects the host app to expose `@redae/core` so other developers understand the coupling and available helpers.
 
-These steps keep the core agnostic while letting vendor packages piggyback on the same layout, Ziggy helpers, and future shared UI pieces without extra build tooling.
+These steps keep the core agnostic while enabling any vendor/** custom package to reuse the same layout, Ziggy helper, and shared translation context without duplicating assets or publishing separate npm packages.
