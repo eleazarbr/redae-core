@@ -22,16 +22,32 @@ final class UpdateCompany
         ]);
 
         if (array_key_exists('billing_address', $data)) {
-            $billingAddress = array_filter(
-                $data['billing_address'] ?? [],
-                static fn ($value) => $value !== null && $value !== ''
-            );
-
-            $company->billing_address_json = $billingAddress ?: null;
+            $company->billing_address_json = $this->formatBillingAddress($data['billing_address'] ?? []);
         }
 
         $company->save();
 
         return $company;
+    }
+
+    /**
+     * @param  array<string, mixed>  $billingAddress
+     */
+    private function formatBillingAddress(array $billingAddress): ?array
+    {
+        $orderedKeys = ['line1', 'city', 'state', 'postal_code'];
+        $formattedAddress = [];
+
+        foreach ($orderedKeys as $key) {
+            $value = $billingAddress[$key] ?? null;
+
+            if ($value === null || $value === '') {
+                continue;
+            }
+
+            $formattedAddress[$key] = $value;
+        }
+
+        return $formattedAddress ?: null;
     }
 }
