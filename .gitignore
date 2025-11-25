@@ -28,3 +28,4 @@ yarn-error.log
 lang/php_*.json
 lang/vendor/
 coverage.xml
+composer.local.json
