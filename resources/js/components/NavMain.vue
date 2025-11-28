@@ -11,6 +11,14 @@ defineProps<{
 const page = usePage<AppPageProps>();
 
 const resolveIconComponent = (icon?: string) => resolveIcon(icon);
+
+const isActive = (href: string): boolean => {
+  if (! href) {
+    return false;
+  }
+
+  return page.url?.startsWith(href);
+};
 </script>
 
 <template>
@@ -25,7 +33,7 @@ const resolveIconComponent = (icon?: string) => resolveIcon(icon);
       >
         <SidebarMenuButton
           as-child
-          :is-active="item.href === page.url"
+          :is-active="isActive(item.href)"
           :tooltip="$t(item.title)"
           >
           <Link :href="item.href">
