@@ -13,6 +13,10 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+      DB_FOREIGN_KEYS: true
 
     steps:
       - name: Checkout
