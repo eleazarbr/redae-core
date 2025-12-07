@@ -41,6 +41,8 @@
 
   @include('partials.favicon')
 
+  @includeWhen(config('gtm.enabled'), 'partials.gtm.head')
+
   <link
     rel="preconnect"
     href="https://fonts.bunny.net"
@@ -56,6 +58,7 @@
 </head>
 
 <body class="font-sans antialiased">
+  @includeWhen(config('gtm.enabled'), 'partials.gtm.body')
   @inertia
 </body>
 

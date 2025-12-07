@@ -3,31 +3,15 @@ import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import type { AppPageProps, NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 import AppLogo from './AppLogo.vue';
 
-const mainNavItems: NavItem[] = [
-  {
-    title: 'dashboard.sidebar.dashboard',
-    href: '/dashboard',
-    icon: LayoutGrid,
-  },
-];
+const page = usePage<AppPageProps>();
 
-const footerNavItems: NavItem[] = [
-  {
-    title: 'dashboard.sidebar.github_repo',
-    href: 'https://github.com/eleazarbr/redae-core',
-    icon: Folder,
-  },
-  {
-    title: 'dashboard.sidebar.documentation',
-    href: route('home'),
-    icon: BookOpen,
-  },
-];
+const mainNavItems = computed<NavItem[]>(() => (page.props.navigation?.sidebar?.main ?? []) as NavItem[]);
+const footerNavItems = computed<NavItem[]>(() => (page.props.navigation?.sidebar?.footer ?? []) as NavItem[]);
 </script>
 
 <template>

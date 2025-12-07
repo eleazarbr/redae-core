@@ -10,9 +10,10 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
+import { resolveIcon } from '@/lib/icons';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
+import { Menu, Search } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 interface Props {
@@ -36,7 +37,7 @@ const mainNavItems: NavItem[] = [
   {
     title: 'Dashboard',
     href: '/dashboard',
-    icon: LayoutGrid,
+    icon: 'LayoutGrid',
   },
 ];
 
@@ -44,14 +45,16 @@ const rightNavItems: NavItem[] = [
   {
     title: 'Repository',
     href: 'https://github.com/laravel/vue-starter-kit',
-    icon: Folder,
+    icon: 'Folder',
   },
   {
     title: 'Documentation',
     href: 'https://laravel.com/docs/starter-kits#vue',
-    icon: BookOpen,
+    icon: 'BookOpen',
   },
 ];
+
+const resolveIconComponent = (icon?: string) => resolveIcon(icon);
 </script>
 
 <template>
@@ -89,7 +92,7 @@ const rightNavItems: NavItem[] = [
                   >
                     <component
                       v-if="item.icon"
-                      :is="item.icon"
+                      :is="resolveIconComponent(item.icon)"
                       class="h-5 w-5"
                     />
                     {{ item.title }}
@@ -106,7 +109,7 @@ const rightNavItems: NavItem[] = [
                   >
                     <component
                       v-if="item.icon"
-                      :is="item.icon"
+                      :is="resolveIconComponent(item.icon)"
                       class="h-5 w-5"
                     />
                     <span>{{ item.title }}</span>
@@ -139,7 +142,7 @@ const rightNavItems: NavItem[] = [
                 >
                   <component
                     v-if="item.icon"
-                    :is="item.icon"
+                    :is="resolveIconComponent(item.icon)"
                     class="mr-2 h-4 w-4"
                   />
                   {{ item.title }}
@@ -184,7 +187,8 @@ const rightNavItems: NavItem[] = [
                         >
                           <span class="sr-only">{{ item.title }}</span>
                           <component
-                            :is="item.icon"
+                            v-if="item.icon"
+                            :is="resolveIconComponent(item.icon)"
                             class="size-5 opacity-80 group-hover:opacity-100"
                           />
                         </a>

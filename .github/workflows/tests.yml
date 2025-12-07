@@ -13,6 +13,10 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
+      DB_FOREIGN_KEYS: true
 
     steps:
       - name: Checkout
@@ -56,4 +60,27 @@ jobs:
         run: npm run build
 
       - name: Tests
-        run: php artisan test
+        run: php artisan test --coverage --min=60
+
+      - name: Setup Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install Chrome Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libatk-bridge2.0-0 libgtk-3-0 libxtst6 xdg-utils libxss1 libasound2t64 fonts-liberation libgbm1
+
+      - name: Update ChromeDriver
+        run: php artisan dusk:chrome-driver --detect --no-interaction
+
+      - name: Run Laravel Dusk Tests
+        run: |
+          php -r "file_put_contents('.env', preg_replace('/^APP_URL=.*/m', 'APP_URL=http://127.0.0.1:8000', file_get_contents('.env')));"
+          php artisan serve --host=127.0.0.1 --port=8000 --no-reload > storage/logs/dusk-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID' EXIT
+          sleep 5
+          php artisan dusk --without-tty
+        env:
+          DUSK_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}

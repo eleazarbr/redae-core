@@ -6,6 +6,7 @@ return [
         'dashboard' => 'Escritorio',
         'github_repo' => 'Repositorio de Github',
         'documentation' => 'Documentación',
+        'company' => 'Compañía',
     ],
     'navbar_user' => [
         'profile' => 'Perfil',

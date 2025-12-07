@@ -1,9 +1,11 @@
 {
     "agents": [
+        "codex",
         "copilot"
     ],
     "editors": [
         "vscode"
     ],
-    "guidelines": []
+    "guidelines": [],
+    "herd_mcp": true
 }

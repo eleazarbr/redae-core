@@ -3,6 +3,7 @@
 return [
     'labels' => [
         'name' => 'Nombre',
+        'last_name' => 'Apellido',
         'email' => 'Correo electrónico',
         'warning' => 'Advertencia',
         'please_proceed_with_caution' => 'Por favor, procede con precaución, esto no se puede deshacer.',
@@ -14,6 +15,7 @@ return [
 
     'placeholders' => [
         'name' => 'Nombre',
+        'last_name' => 'Apellido',
         'email' => 'Correo electrónico',
         'password' => 'Contraseña',
         'current_password' => 'Contraseña actual',
