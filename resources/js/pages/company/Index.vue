@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import AppLayout from '@/layouts/AppLayout.vue';
 import CompanyLayout from '@/layouts/company/Layout.vue';
+import { trans } from '@/core';
 import { AMERICAS_COUNTRIES, type CountryRegion } from '@/lib/countries';
 import { type BreadcrumbItem, type Company } from '@/types';
 
@@ -28,13 +29,6 @@ const breadcrumbItems: BreadcrumbItem[] = [
   },
 ];
 
-const regionLabels: Record<CountryRegion, string> = {
-  'north-america': 'Norteamérica',
-  'central-america': 'Centroamérica',
-  'south-america': 'Sudamérica',
-  caribbean: 'Caribe',
-};
-
 const regionOrder: readonly CountryRegion[] = [
   'north-america',
   'central-america',
@@ -42,17 +36,34 @@ const regionOrder: readonly CountryRegion[] = [
   'caribbean',
 ];
 
-const countryGroups = computed(() =>
-  regionOrder
+const regionLabels = computed<Record<CountryRegion, string>>(() => ({
+  'north-america': trans('company.country_regions.north_america'),
+  'central-america': trans('company.country_regions.central_america'),
+  'south-america': trans('company.country_regions.south_america'),
+  caribbean: trans('company.country_regions.caribbean'),
+}));
+
+const activeLocale = computed(() => document.documentElement.lang || 'en');
+const collator = computed(() => new Intl.Collator(activeLocale.value));
+
+type LocalizedCountry = (typeof AMERICAS_COUNTRIES)[number] & { name: string };
+
+const countryGroups = computed(() => {
+  const localizedCountries: LocalizedCountry[] = AMERICAS_COUNTRIES.map((country) => ({
+    ...country,
+    name: trans(`company.countries.${country.code}`),
+  }));
+
+  return regionOrder
     .map((region) => ({
       region,
-      label: regionLabels[region],
-      options: AMERICAS_COUNTRIES.filter((country) => country.region === region).sort(
-        (a, b) => a.name.localeCompare(b.name, 'es'),
-      ),
+      label: regionLabels.value[region],
+      options: localizedCountries
+        .filter((country) => country.region === region)
+        .sort((a, b) => collator.value.compare(a.name, b.name)),
     }))
-    .filter(({ options }) => options.length > 0),
-);
+    .filter(({ options }) => options.length > 0);
+});
 </script>
 
 <template>
