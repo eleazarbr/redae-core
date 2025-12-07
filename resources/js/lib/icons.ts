@@ -1,5 +1,12 @@
 import type { Component } from 'vue';
-import * as LucideIcons from 'lucide-vue-next';
+import { BookOpen, Building2, Folder, LayoutGrid } from 'lucide-vue-next';
+
+const iconRegistry: Record<string, Component> = {
+  BookOpen,
+  Building2,
+  Folder,
+  LayoutGrid,
+};
 
 /**
  * Resolve a Lucide icon component by its exported name.
@@ -9,8 +16,5 @@ export function resolveIcon(name?: string): Component | undefined {
     return undefined;
   }
 
-  const icons = LucideIcons as unknown as Record<string, Component>;
-
-  return icons[name];
+  return iconRegistry[name];
 }
-
