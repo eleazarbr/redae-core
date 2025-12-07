@@ -62,6 +62,32 @@ class CompanyControllerTest extends TestCase
         ], $company->billing_address_json);
     }
 
+    public function test_domain_can_be_saved_before_dns_is_live(): void
+    {
+        /** @var User $user */
+        $user = User::factory()->create();
+        $company = $user->company;
+
+        $response = $this
+            ->actingAs($user)
+            ->from(route('company.index'))
+            ->patch(route('company.update'), [
+                'name' => self::TEST_COMPANY_NAME,
+                'domain' => 'app.example.test',
+                'tax_id' => null,
+                'country' => null,
+                'billing_address' => [],
+            ]);
+
+        $response
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('company.index'));
+
+        $company->refresh();
+
+        $this->assertSame('app.example.test', $company->domain);
+    }
+
     public function test_slug_is_incremented_when_name_conflicts_with_existing_company(): void
     {
         $company = Company::factory()->create(['slug' => 'original-company']);

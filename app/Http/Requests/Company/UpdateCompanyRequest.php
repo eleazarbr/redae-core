@@ -75,7 +75,7 @@ class UpdateCompanyRequest extends FormRequest
                 'nullable',
                 'string',
                 self::MAX_STRING_LENGTH,
-                'active_url',
+                'regex:/^(?!-)(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?!-)(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$/',
                 Rule::unique('companies', 'domain')->ignore($companyId),
             ],
             'tax_id' => [
