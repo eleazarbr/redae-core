@@ -86,7 +86,6 @@ const passwordValue = ref('');
             <Input
               id="last_name"
               type="text"
-              required
               :tabindex="1"
               autocomplete="family-name"
               name="last_name"
