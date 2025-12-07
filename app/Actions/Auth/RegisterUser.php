@@ -26,7 +26,7 @@ final class RegisterUser
             return User::create([
                 'company_id' => $company->id,
                 'name' => $data['name'],
-                'last_name' => $data['last_name'],
+                'last_name' => $data['last_name'] ?? null,
                 'email' => $data['email'],
                 'password' => $data['password'], // Password is hashed via model mutator.
                 'status' => UserStatus::ACTIVE->value,
