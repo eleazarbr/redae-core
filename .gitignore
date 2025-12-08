@@ -5,6 +5,7 @@
 /public/hot
 /public/storage
 /public/vendor
+.deploy/
 /storage/*.key
 /storage/pail
 /vendor
