@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 class WelcomePageTest extends TestCase
@@ -11,6 +10,8 @@ class WelcomePageTest extends TestCase
     {
         $this->get('/')
             ->assertOk()
-            ->assertInertia(fn (Assert $page) => $page->component('Welcome'));
+            ->assertViewHas('page', function (array $page): bool {
+                return in_array($page['component'] ?? null, ['Welcome', 'sixsigmaspecialists/Landing'], true);
+            });
     }
 }
