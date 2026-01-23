@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class WelcomeController extends Controller
 {
     /**
      * Display the welcome page.
      */
-    public function index(): RedirectResponse
+    public function index(): Response
     {
-        return to_route('login');
+        return Inertia::render('Welcome');
     }
 }
