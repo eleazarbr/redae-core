@@ -54,7 +54,9 @@ if (! is_dir($projectBase)) {
 
 $deployPath = getenv('DEPLOY_PATH') ?: $defaultDeployPath;
 
-localhost('local')->set('deploy_path', $deployPath);
+localhost('local')
+    ->set('http_user', get_current_user())
+    ->set('deploy_path', $deployPath);
 
 $phpBinary = getenv('DEPLOY_PHP') ?: 'php';
 $composerBinary = getenv('DEPLOY_COMPOSER') ?: trim((string) shell_exec('command -v composer'));
