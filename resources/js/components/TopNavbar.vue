@@ -5,11 +5,15 @@ import { computed } from 'vue';
 
 const page = usePage<AppPageProps>();
 const isAuthenticated = computed(() => Boolean(page.props.auth.user));
+const authEnabled = computed(() => page.props.features?.auth ?? true);
 </script>
 
 <template>
   <header class="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
-    <nav class="flex items-center justify-between gap-4">
+    <nav
+      v-if="authEnabled"
+      class="flex items-center justify-between gap-4"
+    >
       <div class="flex items-center gap-4">
         <Link
           v-if="isAuthenticated"

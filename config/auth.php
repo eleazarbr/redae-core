@@ -126,4 +126,17 @@ return [
         'verification' => ThrottleConstants::DEFAULT_RATE_LIMIT,
         'password' => ThrottleConstants::DEFAULT_RATE_LIMIT,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Features
+    |--------------------------------------------------------------------------
+    |
+    | Toggle authentication routes (login, register, password reset) on or off.
+    |
+    */
+
+    'features' => [
+        'auth' => env('AUTH_ENABLED', true),
+    ],
 ];

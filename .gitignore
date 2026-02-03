@@ -5,9 +5,11 @@
 /public/hot
 /public/storage
 /public/vendor
+.deploy/
 /storage/*.key
 /storage/pail
 /vendor
+.dep
 .env
 .env.local
 .env.production
