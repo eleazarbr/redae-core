@@ -11,7 +11,7 @@ class WelcomePageTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertViewHas('page', function (array $page): bool {
-                return in_array($page['component'] ?? null, ['Welcome', 'sixsigmaspecialists/Landing'], true);
+                return ($page['component'] ?? null) === 'Welcome';
             });
     }
 }
